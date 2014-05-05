@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahtzee-IIA", "Yahtzee-IIA\Yahtzee-IIA.csproj", "{DBF9FA0C-F6A9-454F-B81A-7931E88E451D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP.Core", "WP.Core\WP.Core.csproj", "{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,18 @@ Global
 		{DBF9FA0C-F6A9-454F-B81A-7931E88E451D}.Release|x86.ActiveCfg = Release|x86
 		{DBF9FA0C-F6A9-454F-B81A-7931E88E451D}.Release|x86.Build.0 = Release|x86
 		{DBF9FA0C-F6A9-454F-B81A-7931E88E451D}.Release|x86.Deploy.0 = Release|x86
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Debug|ARM.ActiveCfg = Debug|ARM
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Debug|ARM.Build.0 = Debug|ARM
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Debug|x86.ActiveCfg = Debug|x86
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Debug|x86.Build.0 = Debug|x86
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Release|ARM.ActiveCfg = Release|ARM
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Release|ARM.Build.0 = Release|ARM
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Release|x86.ActiveCfg = Release|x86
+		{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
