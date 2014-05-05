@@ -1,0 +1,4 @@
+C:\Users\TCALAI\documents\visual studio 2013\Projects\WP8\WP.Core\Bin\Debug\WP.Core.dll
+C:\Users\TCALAI\documents\visual studio 2013\Projects\WP8\WP.Core\Bin\Debug\WP.Core.pdb
+C:\Users\TCALAI\documents\visual studio 2013\Projects\WP8\WP.Core\obj\Debug\WP.Core.dll
+C:\Users\TCALAI\documents\visual studio 2013\Projects\WP8\WP.Core\obj\Debug\WP.Core.pdb
