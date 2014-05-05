@@ -6,12 +6,17 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Yahtzee_IIA.ViewModels"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.DataContext>
+        <vm:ViewModelMainPage/>
+    </phone:PhoneApplicationPage.DataContext>
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -41,12 +46,22 @@
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MON APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="nom de la page" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.TitlePageText, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel x:Name="Corp" Grid.Row="0" Margin="12,17,0,28">
+                <Image Source="Resources/logo.png" Height="300" Visibility="Visible"/>
+
+                <Button  x:Name="ButtonJouer" Content="Jouer" Command="{Binding GoToGameCommand}"/>
+                <Button  x:Name="ButtonScore" Content="Scores" Command="{Binding GoToRankCommand}"/>
+                <Button  x:Name="ButtonParametre" Content="Paramètres" Command="{Binding GoToSettingCommand}"/>
+
+            </StackPanel>
+
+
+
 
         </Grid>
 

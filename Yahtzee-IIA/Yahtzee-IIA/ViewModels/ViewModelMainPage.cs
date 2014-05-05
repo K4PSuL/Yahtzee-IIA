@@ -7,7 +7,7 @@ using System.Windows;
 using WP.Core;
 using Yahtzee_IIA;
 
-namespace WP8.DevicStatus.ViewModels
+namespace Yahtzee_IIA.ViewModels
 {
     public class ViewModelMainPage : ObservableObject
     {
@@ -15,17 +15,35 @@ namespace WP8.DevicStatus.ViewModels
         #region Fields
 
         private DelegateCommand _goToGameCommand;
+        private DelegateCommand _goToSettingCommand;
+        private DelegateCommand _goToRankCommand;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        ///     Obtien la commande GoToDeviceStatusCommand
+        ///     Obtien la commande _goToGameCommand
         /// </summary>
         public DelegateCommand GoToGameCommand
         {
             get { return _goToGameCommand; }
+        }
+
+        /// <summary>
+        ///     Obtien la commande _goToSettingCommand
+        /// </summary>
+        public DelegateCommand GoToSettingCommand
+        {
+            get { return _goToSettingCommand; }
+        }
+
+        /// <summary>
+        ///     Obtien la commande _goToRankCommand
+        /// </summary>
+        public DelegateCommand GoToRankCommand
+        {
+            get { return _goToRankCommand; }
         }
 
 
@@ -37,6 +55,8 @@ namespace WP8.DevicStatus.ViewModels
         {
             // On initialise la commande GoToDeviceStatusCommand qui utilisera la methode ExecuteGoToDeviceStatusCommand
             _goToGameCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
+            _goToSettingCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
+            _goToRankCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
 
             // Permet d'executer une commande depuis le code C#
             // _GoToDeviceStatusCommand.Execute(null);
