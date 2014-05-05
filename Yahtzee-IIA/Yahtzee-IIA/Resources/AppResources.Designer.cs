@@ -79,11 +79,56 @@ namespace Yahtzee_IIA.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à MON APPLICATION.
+        ///   Recherche une chaîne localisée semblable à Yahtzee.
         /// </summary>
         public static string ApplicationTitle {
             get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nombre de joueurs :.
+        /// </summary>
+        public static string NbPlayersText {
+            get {
+                return ResourceManager.GetString("NbPlayersText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pseudo du joueur 1 :.
+        /// </summary>
+        public static string Players1Text {
+            get {
+                return ResourceManager.GetString("Players1Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pseudo du joueur 2 :.
+        /// </summary>
+        public static string Players2Text {
+            get {
+                return ResourceManager.GetString("Players2Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pseudo du joueur 3 :.
+        /// </summary>
+        public static string Players3Text {
+            get {
+                return ResourceManager.GetString("Players3Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pseudo du joueur 4 :.
+        /// </summary>
+        public static string Players4Text {
+            get {
+                return ResourceManager.GetString("Players4Text", resourceCulture);
             }
         }
         
@@ -106,11 +151,47 @@ namespace Yahtzee_IIA.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Configurations.
+        /// </summary>
+        public static string TitleCustomizePageText {
+            get {
+                return ResourceManager.GetString("TitleCustomizePageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Jouer.
+        /// </summary>
+        public static string TitleGamePageText {
+            get {
+                return ResourceManager.GetString("TitleGamePageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Accueil.
         /// </summary>
         public static string TitlePageText {
             get {
                 return ResourceManager.GetString("TitlePageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Scores.
+        /// </summary>
+        public static string TitleRankPageText {
+            get {
+                return ResourceManager.GetString("TitleRankPageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Paramètres.
+        /// </summary>
+        public static string TitleSettingPageText {
+            get {
+                return ResourceManager.GetString("TitleSettingPageText", resourceCulture);
             }
         }
     }

@@ -14,7 +14,7 @@ namespace Yahtzee_IIA.ViewModels
 
         #region Fields
 
-        private DelegateCommand _goToGameCommand;
+        private DelegateCommand _goToCustomizeCommand;
         private DelegateCommand _goToSettingCommand;
         private DelegateCommand _goToRankCommand;
 
@@ -23,11 +23,11 @@ namespace Yahtzee_IIA.ViewModels
         #region Properties
 
         /// <summary>
-        ///     Obtien la commande _goToGameCommand
+        ///     Obtien la commande _goToCustomizeCommand
         /// </summary>
-        public DelegateCommand GoToGameCommand
+        public DelegateCommand GoToCustomizeCommand
         {
-            get { return _goToGameCommand; }
+            get { return _goToCustomizeCommand; }
         }
 
         /// <summary>
@@ -46,7 +46,6 @@ namespace Yahtzee_IIA.ViewModels
             get { return _goToRankCommand; }
         }
 
-
         #endregion
 
         #region Constructors
@@ -54,7 +53,7 @@ namespace Yahtzee_IIA.ViewModels
         public ViewModelMainPage()
         {
             // On initialise la commande GoToDeviceStatusCommand qui utilisera la methode ExecuteGoToDeviceStatusCommand
-            _goToGameCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
+            _goToCustomizeCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
             _goToSettingCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
             _goToRankCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
 

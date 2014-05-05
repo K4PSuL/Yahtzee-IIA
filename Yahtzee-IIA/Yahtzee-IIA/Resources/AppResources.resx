@@ -126,7 +126,7 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>MON APPLICATION</value>
+    <value>Yahtzee</value>
   </data>
   <data name="AppBarButtonText" xml:space="preserve">
     <value>ajouter</value>
@@ -134,7 +134,34 @@
   <data name="AppBarMenuItemText" xml:space="preserve">
     <value>Élément de menu</value>
   </data>
+  <data name="NbPlayersText" xml:space="preserve">
+    <value>Nombre de joueurs :</value>
+  </data>
+  <data name="Players1Text" xml:space="preserve">
+    <value>Pseudo du joueur 1 :</value>
+  </data>
+  <data name="Players2Text" xml:space="preserve">
+    <value>Pseudo du joueur 2 :</value>
+  </data>
+  <data name="Players3Text" xml:space="preserve">
+    <value>Pseudo du joueur 3 :</value>
+  </data>
+  <data name="Players4Text" xml:space="preserve">
+    <value>Pseudo du joueur 4 :</value>
+  </data>
+  <data name="TitleCustomizePageText" xml:space="preserve">
+    <value>Configurations</value>
+  </data>
+  <data name="TitleGamePageText" xml:space="preserve">
+    <value>Jouer</value>
+  </data>
   <data name="TitlePageText" xml:space="preserve">
     <value>Accueil</value>
+  </data>
+  <data name="TitleRankPageText" xml:space="preserve">
+    <value>Scores</value>
+  </data>
+  <data name="TitleSettingPageText" xml:space="preserve">
+    <value>Paramètres</value>
   </data>
 </root>

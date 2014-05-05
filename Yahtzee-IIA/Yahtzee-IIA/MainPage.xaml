@@ -54,7 +54,7 @@
             <StackPanel x:Name="Corp" Grid.Row="0" Margin="12,17,0,28">
                 <Image Source="Resources/logo.png" Height="300" Visibility="Visible"/>
 
-                <Button  x:Name="ButtonJouer" Content="Jouer" Command="{Binding GoToGameCommand}"/>
+                <Button  x:Name="ButtonJouer" Content="Jouer" Command="{Binding GoToCustomizeCommand}"/>
                 <Button  x:Name="ButtonScore" Content="Scores" Command="{Binding GoToRankCommand}"/>
                 <Button  x:Name="ButtonParametre" Content="Paramètres" Command="{Binding GoToSettingCommand}"/>
 
