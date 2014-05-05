@@ -8,11 +8,45 @@ namespace Yahtzee_IIA.Models
 {
     class Combination
     {
+        #region Fields
+
+        private int _id;
         private String _name;
 	    private String _description; 
-	    private int _value; 
+	    private int _value;
+
+        /// <summary>
+        ///     Permet de savoir si la combinaison est déjà remplie ou non
+        /// </summary>
 	    private bool _filled; 
+
+        /// <summary>
+        ///     Permet de savoir si la combinaison est jouable (si sélection possible)
+        /// </summary>
 	    private bool _playable;
+
+        /// <summary>
+        ///     Permet de savoir à quelle section la combinaison appartient (upper, prime, lower)
+        /// </summary>
+        private String _group;
+
+        #endregion
+
+        #region Properties
+
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+
+                    //this.OnPropertyChanged();
+                }
+            }
+        }
 
         public String Name
         {
@@ -84,12 +118,53 @@ namespace Yahtzee_IIA.Models
             }
         }
 
-	    public int calculateValue (int[] dices)
+        public String Group
         {
-        
-        
-            return 0;
-        } 
+            get { return _group; }
+            set
+            {
+                if (_group != value)
+                {
+                    _group = value;
 
+                    //this.OnPropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initialise une nouvelle instance de la classe Combination
+        /// </summary>
+        /// <param name="name">Nom de la combinaison</param>
+        /// <param name="description">Description de la combinaison</param>
+        public Combination(String name, String description, String group)
+        {
+            _name = name;
+            _description = description;
+            _value = 0;
+            _filled = false;
+            _playable = false;
+            _group = group;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Calcule la valeur possible d'après les 5 dés passés en paramètre
+        /// </summary>
+        /// <param name="dices">Tableau des 5 dés</param>
+        /// <returns>Valeur possible de la combinaison</returns>
+        public int calculateValue (int[] dices)
+        {
+            return 0;
+        }
+
+        #endregion
     }
 }

@@ -8,11 +8,15 @@ namespace Yahtzee_IIA.Models
 {
     class Player
     {
+        #region Fields
 
         private int _id;
         private String _name;
         private Score _score;
 
+        #endregion
+
+        #region Properties
 
         public int Id
         {
@@ -55,5 +59,23 @@ namespace Yahtzee_IIA.Models
             }
         }
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initialise une nouvelle instance de la classe Player
+        /// </summary>
+        /// <param name="id">Id du joueur</param>
+        /// <param name="name">Nom du joueur</param>
+        /// <param name="score">Score du joueur</param>
+        public Player(int id, String name, Score score)
+        {
+            _id = id;
+            _name = name;
+            _score = score;
+        }
+
+        #endregion
     }
 }

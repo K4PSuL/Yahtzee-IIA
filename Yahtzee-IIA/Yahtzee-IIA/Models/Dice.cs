@@ -8,9 +8,15 @@ namespace Yahtzee_IIA.Models
 {
     class Dice
     {
+        #region Fields
+
         private int _number; 
         private Boolean _keep; 
         private String _image;
+
+        #endregion
+
+        #region Properties
 
         public int Number
         {
@@ -54,5 +60,20 @@ namespace Yahtzee_IIA.Models
             }
         }
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initialise une nouvelle instance de la classe Dice
+        /// </summary>
+        public Dice()
+        {
+            _number = 0;
+            _keep = true;
+            _image = null;
+        }
+
+        #endregion
     }
 }
