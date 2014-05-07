@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yahtzee_IIA.ViewModels
 {
-    class ViewModelsGame
+    class ViewModelGame
     {
     }
 }
