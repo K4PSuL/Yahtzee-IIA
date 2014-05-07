@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WP.Core;
 
 namespace Yahtzee_IIA.Models
 {
-    class Dice
+    class Dice : ObservableObject
     {
         #region Fields
 
@@ -21,43 +22,19 @@ namespace Yahtzee_IIA.Models
         public int Number
         {
             get { return _number; }
-            set
-            {
-                if (_number != value)
-                {
-                    _number = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _number, value); }
         }
 
         public Boolean Keep
         {
             get { return _keep; }
-            set
-            {
-                if (_keep != value)
-                {
-                    _keep = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _keep, value); }
         }
 
         public String Image
         {
             get { return _image; }
-            set
-            {
-                if (_image != value)
-                {
-                    _image = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _image, value); }
         }
 
         #endregion

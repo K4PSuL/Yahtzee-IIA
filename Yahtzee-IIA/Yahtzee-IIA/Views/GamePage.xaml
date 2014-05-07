@@ -1,0 +1,47 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Yahtzee_IIA.Views.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Yahtzee_IIA.ViewModels"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.DataContext>
+        <vm:ViewModelGame/>
+    </phone:PhoneApplicationPage.DataContext>
+
+    <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <controls:Pivot Title="Test" ItemsSource="{Binding aPlayers}" 
+                            SelectedItem="{Binding SelectedPlayers, Mode=TwoWay}">
+            <controls:Pivot.HeaderTemplate>
+
+                <DataTemplate>
+                    <TextBlock Text="{Binding Pseudo}" Style="{StaticResource PhoneTextTitle1Style}"/>
+                </DataTemplate>
+
+            </controls:Pivot.HeaderTemplate>
+
+            <controls:Pivot.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Pseudo}" Style="{StaticResource PhoneTextLargeStyle}" />
+                        <Button IsEnabled="{Binding CanPlay}"/>
+                    </Grid>
+                </DataTemplate>
+            </controls:Pivot.ItemTemplate>
+        </controls:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>

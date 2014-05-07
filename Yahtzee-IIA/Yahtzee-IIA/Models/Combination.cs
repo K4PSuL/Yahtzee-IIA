@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WP.Core;
 
 namespace Yahtzee_IIA.Models
 {
-    class Combination
+    class Combination : ObservableObject
     {
         #region Fields
 
@@ -37,99 +38,44 @@ namespace Yahtzee_IIA.Models
         public int Id
         {
             get { return _id; }
-            set
-            {
-                if (_id != value)
-                {
-                    _id = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _id, value); }
+           
         }
 
         public String Name
         {
             get { return _name; }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _name, value); }
         }
 
         public String Description
         {
             get { return _description; }
-            set
-            {
-                if (_description != value)
-                {
-                    _description = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _description, value); }
         }
 
         public int Value
         {
             get { return _value; }
-            set
-            {
-                if (_value != value)
-                {
-                    _value = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _value, value); }
         }
 
         public bool Filled
         {
             get { return _filled; }
-            set
-            {
-                if (_filled != value)
-                {
-                    _filled = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _filled, value); }
         }
 
         public bool Playable
         {
             get { return _playable; }
-            set
-            {
-                if (_playable != value)
-                {
-                    _playable = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _playable, value); }
         }
 
         public String Group
         {
             get { return _group; }
-            set
-            {
-                if (_group != value)
-                {
-                    _group = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _group, value); }
         }
 
         #endregion

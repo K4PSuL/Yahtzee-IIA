@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WP.Core;
 
 namespace Yahtzee_IIA.Models
 {
-    class Score
+    class Score : ObservableObject
     {
         #region Fields
 
@@ -19,15 +20,7 @@ namespace Yahtzee_IIA.Models
         public Combination[] aCombinations 
         {
             get { return _aCombinations; }
-            set
-            {
-                if (_aCombinations != value)
-                {
-                    _aCombinations = value;
-
-                    //this.OnPropertyChanged();
-                }
-            }
+            set { Assign(ref _aCombinations, value); }
         }
 
         #endregion

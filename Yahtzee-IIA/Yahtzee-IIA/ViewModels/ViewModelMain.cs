@@ -9,7 +9,7 @@ using Yahtzee_IIA;
 
 namespace Yahtzee_IIA.ViewModels
 {
-    public class ViewModelMainPage : ObservableObject
+    public class ViewModelMain : ObservableObject
     {
 
         #region Fields
@@ -50,7 +50,7 @@ namespace Yahtzee_IIA.ViewModels
 
         #region Constructors
 
-        public ViewModelMainPage()
+        public ViewModelMain()
         {
             // On initialise la commande GoToDeviceStatusCommand qui utilisera la methode ExecuteGoToDeviceStatusCommand
             _goToCustomizeCommand = new DelegateCommand(ExecuteGoToNavigateCommand);

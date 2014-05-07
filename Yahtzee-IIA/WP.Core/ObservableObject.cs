@@ -59,7 +59,26 @@ namespace WP.Core
             }
         }
 
+
+        protected virtual void Assign<T>(ref T field, T newValue, [CallerMemberName]string propertyName = "")
+        {
+
+            if (field == null || !(field.Equals(newValue)))
+            {
+                // S'assure que la methode OnPropertyChanging est bien executer sur le thread UI !! (SINON CA PLANTE !!)
+                System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() => OnPropertyChanging(propertyName));
+
+
+                field = newValue;
+
+                // S'assure que la methode OnPropertyChanged est bien executer sur le thread UI !! (SINON CA PLANTE !!)
+                System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() => OnPropertyChanged(propertyName));
+            }
+
+        }
+
+
         #endregion
-  
+
     }
 }
