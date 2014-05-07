@@ -93,23 +93,21 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\YahtzeeDataContext.cs" />
     <Compile Include="ViewModels\ViewModelGame.cs" />
-    <Compile Include="Views\ViewCustomize.xaml.cs">
-      <DependentUpon>ViewCustomize.xaml</DependentUpon>
+    <Compile Include="Views\CustomizePage.xaml.cs">
+      <DependentUpon>CustomizePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="Views\ViewGame.xaml.cs">
-      <DependentUpon>ViewGame.xaml</DependentUpon>
+    <Compile Include="Views\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewMain.xaml.cs">
-      <DependentUpon>ViewMain.xaml</DependentUpon>
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Combination.cs" />
     <Compile Include="Models\Dice.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\Score.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -124,15 +122,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Views\ViewCustomize.xaml">
+    <Page Include="Views\CustomizePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ViewGame.xaml">
+    <Page Include="Views\GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ViewMain.xaml">
+    <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,16 +177,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WP.Core\WP.Core.csproj">
-      <Project>{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}</Project>
-      <Name>WP.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WP.Core\WP.Core.csproj">
+      <Project>{89877D1D-EE39-4CA9-819E-0DBC21EE4C91}</Project>
+      <Name>WP.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

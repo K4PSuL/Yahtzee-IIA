@@ -6,3 +6,7 @@ C:\Users\TCALAI\Desktop\Windows Phone\Yahtzee-IIA\Yahtzee-IIA\WP.Core\Bin\Debug\
 C:\Users\TCALAI\Desktop\Windows Phone\Yahtzee-IIA\Yahtzee-IIA\WP.Core\Bin\Debug\WP.Core.pdb
 C:\Users\TCALAI\Desktop\Windows Phone\Yahtzee-IIA\Yahtzee-IIA\WP.Core\obj\Debug\WP.Core.dll
 C:\Users\TCALAI\Desktop\Windows Phone\Yahtzee-IIA\Yahtzee-IIA\WP.Core\obj\Debug\WP.Core.pdb
+C:\Users\Aurelie\Source\Repos\Yahtzee-iia\Yahtzee-IIA\WP.Core\Bin\Debug\WP.Core.dll
+C:\Users\Aurelie\Source\Repos\Yahtzee-iia\Yahtzee-IIA\WP.Core\Bin\Debug\WP.Core.pdb
+C:\Users\Aurelie\Source\Repos\Yahtzee-iia\Yahtzee-IIA\WP.Core\obj\Debug\WP.Core.dll
+C:\Users\Aurelie\Source\Repos\Yahtzee-iia\Yahtzee-IIA\WP.Core\obj\Debug\WP.Core.pdb
