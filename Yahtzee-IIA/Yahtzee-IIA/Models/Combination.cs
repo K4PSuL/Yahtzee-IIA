@@ -18,18 +18,18 @@ namespace Yahtzee_IIA.Models
         private long _idPlayer;
         private EntityRef<Player> _playerRef;
         private String _name;
-        private String _description;
-        private int _value;
+	    private String _description; 
+	    private int _value;
 
         /// <summary>
         ///     Permet de savoir si la combinaison est déjà remplie ou non
         /// </summary>
-        private bool _filled;
+	    private bool _filled; 
 
         /// <summary>
         ///     Permet de savoir si la combinaison est jouable (si sélection possible)
         /// </summary>
-        private bool _playable;
+	    private bool _playable;
 
         /// <summary>
         ///     Permet de savoir à quelle section la combinaison appartient (upper, prime, lower)
@@ -45,7 +45,7 @@ namespace Yahtzee_IIA.Models
         {
             get { return _id; }
             set { Assign(ref _id, value); }
-
+           
         }
 
         [Column(DbType = "BigInt NOT NULL", CanBeNull = false)]
@@ -133,7 +133,7 @@ namespace Yahtzee_IIA.Models
         /// </summary>
         /// <param name="dices">Tableau des 5 dés</param>
         /// <returns>Valeur possible de la combinaison</returns>
-        public int calculateValue(int[] dices)
+        public int calculateValue (int[] dices)
         {
             return 0;
         }

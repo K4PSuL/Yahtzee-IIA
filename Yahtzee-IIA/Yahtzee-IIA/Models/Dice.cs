@@ -13,8 +13,8 @@ namespace Yahtzee_IIA.Models
     {
         #region Fields
 
-        private int _number;
-        private Boolean _keep;
+        private int _number; 
+        private Boolean _keep; 
         private String _image;
 
         #endregion

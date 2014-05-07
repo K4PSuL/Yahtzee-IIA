@@ -20,12 +20,12 @@ namespace Yahtzee_IIA.Models
         /// <summary>
         ///     Nombre de lancers restants
         /// </summary>
-        private int _nbRoll;
+	    private int _nbRoll; 
 
         /// <summary>
         ///     Tableau des 5 dés
         /// </summary>
-        private Dice[] _dices;
+	    private Dice[] _dices;
 
         #endregion
 
@@ -91,7 +91,7 @@ namespace Yahtzee_IIA.Models
         /// <summary>
         ///     Appelle la fonction random pour les dés dont la propriété keep=false
         /// </summary>
-        public void roll()
+        public void roll() 
         {
 
         }
@@ -100,7 +100,7 @@ namespace Yahtzee_IIA.Models
         ///     Génère un nombre aléatoire entre 1 et 5 pour le dé passé en paramètre
         /// </summary>
         /// <param name="dice">Dé sur lequel effectuer le tirage</param>
-        public void random(Dice dice)
+	    public void random (Dice dice) 
         {
             //TODO: mettre à jour la propriété « number » du dé passé en paramètre avec le nombre aléatoire
         }
