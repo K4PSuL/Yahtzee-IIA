@@ -23,7 +23,7 @@
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="Test" ItemsSource="{Binding aPlayers}" 
+        <!--<controls:Pivot Title="Test" ItemsSource="{Binding Game.aPlayers}" 
                             SelectedItem="{Binding SelectedPlayers, Mode=TwoWay}">
             <controls:Pivot.HeaderTemplate>
 
@@ -41,7 +41,7 @@
                     </Grid>
                 </DataTemplate>
             </controls:Pivot.ItemTemplate>
-        </controls:Pivot>
+        </controls:Pivot>-->
     </Grid>
 
 </phone:PhoneApplicationPage>

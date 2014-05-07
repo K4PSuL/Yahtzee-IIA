@@ -1,0 +1,48 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Yahtzee_IIA.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Yahtzee_IIA.ViewModels"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.DataContext>
+        <vm:ViewModelMain/>
+    </phone:PhoneApplicationPage.DataContext>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding Path=LocalizedResources.TitlePageText, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            
+            <StackPanel x:Name="Corp" Grid.Row="0" Margin="12,17,0,28">
+                <Image Source="Resources/logo.png" Height="300" Visibility="Visible"/>
+
+                <Button  x:Name="ButtonJouer" Content="Jouer" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewCustomize.xaml"/>
+                <Button  x:Name="ButtonScore" Content="Scores" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewRank.xaml"/>
+                <Button  x:Name="ButtonParametre" Content="Paramètres" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewSetting.xaml"/>
+
+            </StackPanel>
+
+
+
+
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

@@ -93,16 +93,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ViewModelsGame.cs" />
-    <Compile Include="Views\CustomizePage.xaml.cs">
-      <DependentUpon>CustomizePage.xaml</DependentUpon>
+    <Compile Include="Models\YahtzeeDataContext.cs" />
+    <Compile Include="ViewModels\ViewModelGame.cs" />
+    <Compile Include="Views\ViewCustomize.xaml.cs">
+      <DependentUpon>ViewCustomize.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="Views\GamePage.xaml.cs">
-      <DependentUpon>GamePage.xaml</DependentUpon>
+    <Compile Include="Views\ViewGame.xaml.cs">
+      <DependentUpon>ViewGame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Views\ViewMain.xaml.cs">
+      <DependentUpon>ViewMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Combination.cs" />
     <Compile Include="Models\Dice.cs" />
@@ -123,15 +124,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Views\CustomizePage.xaml">
+    <Page Include="Views\ViewCustomize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GamePage.xaml">
+    <Page Include="Views\ViewGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPage.xaml">
+    <Page Include="Views\ViewMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,12 +6,17 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Yahtzee_IIA.ViewModels"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.DataContext>
+        <vm:ViewModelCustomize/>
+    </phone:PhoneApplicationPage.DataContext>
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -32,39 +37,51 @@
 
             <StackPanel >
                 <StackPanel Orientation="Horizontal" Margin="100,25,0,10">
-                    <RadioButton GroupName="nbPlayers">2</RadioButton>
-                    <RadioButton GroupName="nbPlayers">3</RadioButton>
-                    <RadioButton GroupName="nbPlayers">4</RadioButton>
+
+                    <RadioButton Name="nbPlayers2"
+                     GroupName="nbPlayers"
+                     Content="2"
+                     IsChecked="{Binding Path=Is2Player, Mode=TwoWay}" />
+
+                    <RadioButton Name="nbPlayers3"
+                     GroupName="nbPlayers"
+                     Content="3"
+                     IsChecked="{Binding Path=Is3Player, Mode=TwoWay}" />
+
+                    <RadioButton Name="nbPlayers4"
+                     GroupName="nbPlayers"
+                     Content="4"
+                     IsChecked="{Binding Path=Is4Player, Mode=TwoWay}" />
+
                 </StackPanel>
                 
                 <TextBlock Text="{Binding Path=LocalizedResources.Players1Text, Source={StaticResource LocalizedStrings}}" 
                                                Style="{StaticResource PhoneTextTitle3Style}"/>
 
                 <TextBox x:Name="TextBoxPlayers1"
-                         Text="{Binding Name, Mode=TwoWay}"/>
+                         Text="{Binding Pseudo1, Mode=TwoWay}"/>
 
                 <TextBlock Text="{Binding Path=LocalizedResources.Players2Text, Source={StaticResource LocalizedStrings}}" 
                                                Style="{StaticResource PhoneTextTitle3Style}"/>
 
                 <TextBox x:Name="TextBoxPlayers2"
-                         Text="{Binding Name, Mode=TwoWay}"/>
+                         Text="{Binding Pseudo2, Mode=TwoWay}"/>
 
                 <TextBlock Text="{Binding Path=LocalizedResources.Players3Text, Source={StaticResource LocalizedStrings}}" 
                                                Style="{StaticResource PhoneTextTitle3Style}"/>
 
                 <TextBox x:Name="TextBoxPlayers3"
-                         Text="{Binding Name, Mode=TwoWay}"/>
+                         Text="{Binding Pseudo3, Mode=TwoWay}"/>
 
                 <TextBlock Text="{Binding Path=LocalizedResources.Players4Text, Source={StaticResource LocalizedStrings}}" 
                                                Style="{StaticResource PhoneTextTitle3Style}"/>
 
                 <TextBox x:Name="TextBoxPlayers4"
-                         Text="{Binding Name, Mode=TwoWay}"/>
+                         Text="{Binding Pseudo4, Mode=TwoWay}"/>
 
                 <Button x:Name="ButtonGame" Content="Go !" Command="{Binding GoToGameCommand}"/>
 
             </StackPanel>
-
         </Grid>
     </Grid>
 

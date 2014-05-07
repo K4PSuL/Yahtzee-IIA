@@ -14,48 +14,26 @@ namespace Yahtzee_IIA.ViewModels
 
         #region Fields
 
-        private DelegateCommand _goToCustomizeCommand;
-        private DelegateCommand _goToSettingCommand;
-        private DelegateCommand _goToRankCommand;
+        private DelegateCommand _goToNavigateCommand;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        ///     Obtien la commande _goToCustomizeCommand
+        ///     Obtien la commande _goToNavigateCommand
         /// </summary>
-        public DelegateCommand GoToCustomizeCommand
+        public DelegateCommand GoToNavigateCommand
         {
-            get { return _goToCustomizeCommand; }
+            get { return _goToNavigateCommand; }
         }
-
-        /// <summary>
-        ///     Obtien la commande _goToSettingCommand
-        /// </summary>
-        public DelegateCommand GoToSettingCommand
-        {
-            get { return _goToSettingCommand; }
-        }
-
-        /// <summary>
-        ///     Obtien la commande _goToRankCommand
-        /// </summary>
-        public DelegateCommand GoToRankCommand
-        {
-            get { return _goToRankCommand; }
-        }
-
         #endregion
 
         #region Constructors
 
         public ViewModelMain()
         {
-            // On initialise la commande GoToDeviceStatusCommand qui utilisera la methode ExecuteGoToDeviceStatusCommand
-            _goToCustomizeCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
-            _goToSettingCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
-            _goToRankCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
+            _goToNavigateCommand = new DelegateCommand(ExecuteGoToNavigateCommand);
 
             // Permet d'executer une commande depuis le code C#
             // _GoToDeviceStatusCommand.Execute(null);
