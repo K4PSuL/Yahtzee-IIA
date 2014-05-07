@@ -76,21 +76,21 @@ namespace Yahtzee_IIA.Models
             set { Assign(ref _description, value); }
         }
 
-        [Column(DbType = "Integer", CanBeNull = false)]
+        [Column(DbType = "Int", CanBeNull = false)]
         public int Value
         {
             get { return _value; }
             set { Assign(ref _value, value); }
         }
 
-        [Column(DbType = "Boolean NOT NULL", CanBeNull = false)]
+        [Column(DbType = "Bit NOT NULL", CanBeNull = false)]
         public bool Filled
         {
             get { return _filled; }
             set { Assign(ref _filled, value); }
         }
 
-        [Column(DbType = "Boolean NOT NULL", CanBeNull = false)]
+        [Column(DbType = "Bit NOT NULL", CanBeNull = false)]
         public bool Playable
         {
             get { return _playable; }

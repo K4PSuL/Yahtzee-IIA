@@ -9,7 +9,7 @@ using WP.Core;
 namespace Yahtzee_IIA.Models
 {
     [Table]
-    class Dice : ObservableObject
+    public class Dice : ObservableObject
     {
         #region Fields
 
@@ -21,14 +21,14 @@ namespace Yahtzee_IIA.Models
 
         #region Properties
 
-        [Column(DbType = "Integer")]
+        [Column(DbType = "Int")]
         public int Number
         {
             get { return _number; }
             set { Assign(ref _number, value); }
         }
 
-        [Column(DbType = "Boolean", CanBeNull = false)]
+        [Column(DbType = "Bit", CanBeNull = false)]
         public Boolean Keep
         {
             get { return _keep; }

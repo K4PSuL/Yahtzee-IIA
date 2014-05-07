@@ -16,6 +16,7 @@ namespace Yahtzee_IIA.Models
 
         private long _id;
         private EntitySet<Player> _aPlayers;
+        //private Player[] _aPlayers;
 
         /// <summary>
         ///     Nombre de lancers restants
@@ -31,14 +32,21 @@ namespace Yahtzee_IIA.Models
 
         #region Properties
 
-        [Association(Storage = "Players", OtherKey = "IdPlayer")]
+        [Column(IsPrimaryKey = true, DbType = "BigInt NOT NULL IDENTITY", CanBeNull = false, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
+        public long Id
+        {
+            get { return _id; }
+            set { Assign(ref _id, value); }
+        }
+
+        [Association(Storage = "Players", OtherKey = "IdGame")]
         public EntitySet<Player> Players
         {
             get { return _aPlayers; }
             set { _aPlayers.Assign(value); }
         }
 
-        [Column(DbType = "Integer", CanBeNull = false)]
+        [Column(DbType = "Int", CanBeNull = false)]
         public int NbRoll
         {
             get { return _nbRoll; }
@@ -59,17 +67,21 @@ namespace Yahtzee_IIA.Models
         ///     Initialise une nouvelle instance de la classe Game
         /// </summary>
         /// <param name="nbPlayers">Nombre de joueurs de la partie</param>
-        public Game(int nbPlayers)
+        /// <param name="listPlayers">Liste des joueurs</param>
+        public Game()
         {
             //_aPlayers = new Player[nbPlayers];
             _aPlayers = new EntitySet<Player>(AttachPlayer, DetachPlayer);
+
+ 
             _nbRoll = 3;
 
-            for (int i = 0; i < 5; i++)
-            {
-                Dice dice = new Dice();
-                _dices[i] = dice;
-            }
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    Dice dice = new Dice();
+
+            //    _dices[i] = dice;
+            //}
         }
 
         #endregion

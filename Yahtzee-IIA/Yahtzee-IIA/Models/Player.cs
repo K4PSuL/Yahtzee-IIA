@@ -126,8 +126,7 @@ namespace Yahtzee_IIA.Models
             for (int i = 0; i < names.Length; i++)
             {
                 Combination combination = new Combination(names[i], descriptions[i], groups[i]);
-                combination.Id = i;
-                _aCombinations[i] = combination;
+                YahtzeeDataContext.Instance.Combination.InsertOnSubmit(combination);
             }
         }
 

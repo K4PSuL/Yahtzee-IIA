@@ -157,13 +157,13 @@ namespace Yahtzee_IIA.ViewModels
 
             if (Is3Player)
             {
-                chaine = "?nbPlayer=2";
+                chaine = "?nbPlayer=3";
                 chaine += "&pseudo1=" + Pseudo1 + "&pseudo2=" + Pseudo2 + "&pseudo3=" + Pseudo3;
             }
 
             if (Is4Player)
             {
-                chaine = "?nbPlayer=3";
+                chaine = "?nbPlayer=4";
                 chaine += "&pseudo1=" + Pseudo1 + "&pseudo2=" + Pseudo2 + "&pseudo3=" + Pseudo3 + "&pseudo4=" + Pseudo4;
             }
 
@@ -186,7 +186,7 @@ namespace Yahtzee_IIA.ViewModels
                 return true;
             }
 
-             return false;
+            return false;
         }
 
 

@@ -15,14 +15,15 @@ namespace Yahtzee_IIA.ViewModels
             private DelegateCommand _nextPlayerCommand;
             private Player _selectedPlayer;
             private Game _game;
+            private Player[] _listPlayers;
         #endregion
 
         #region Constructors
             public ViewModelGame()
                 {
                     _nextPlayerCommand = new DelegateCommand(ExecuteNextPlayerCommand);
-                    _game = new Game(3); // 3 Players
                     //_selectedPlayer = new Player();
+                    ListPlayers = new Player[4];
                 }
         #endregion
 
@@ -43,6 +44,13 @@ namespace Yahtzee_IIA.ViewModels
             {
                 get { return _nextPlayerCommand; }
             }
+
+            public Player[] ListPlayers
+            {
+                get { return _listPlayers; }
+                set { Assign(ref _listPlayers, value); }
+            }
+
         #endregion
 
         #region Methods
@@ -53,24 +61,29 @@ namespace Yahtzee_IIA.ViewModels
 
             public void LoadData(int nbPlayer, string pseudo1, string pseudo2, string pseudo3, string pseudo4)
             {
-                Player[] listPlayers;
+                
+                ListPlayers[0] = new Player(pseudo1);
+                ListPlayers[1] = new Player(pseudo2);
 
-                listPlayers[0] = new Player(pseudo1);
-                listPlayers[1] = new Player(pseudo2);
-                listPlayers[2] = new Player(pseudo3);
-                listPlayers[3] = new Player(pseudo4);
+                if (nbPlayer > 2)
+                {
+                    ListPlayers[2] = new Player(pseudo3);
 
-
-                _game = new Game(listPlayers);
+                    if (nbPlayer > 3)
+                    {
+                        ListPlayers[3] = new Player(pseudo4);
+                    }
+                }
                 
                 
-                Console.WriteLine(nbPlayer);
-                Console.WriteLine(pseudo1);
-                Console.WriteLine(pseudo2);
-                Console.WriteLine(pseudo3);
-                Console.WriteLine(pseudo4);
 
+                this.Game = new Models.Game();
+                this.Game.Players.AddRange(_listPlayers.Where( p => p != null));
 
+                YahtzeeDataContext.Instance.Game.InsertOnSubmit(Game);
+
+                System.Diagnostics.Debug.WriteLine(Game.Players[0].Name);
+                System.Diagnostics.Debug.WriteLine(ListPlayers.Length);
             }
 
 

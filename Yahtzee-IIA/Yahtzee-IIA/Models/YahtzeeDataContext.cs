@@ -30,6 +30,21 @@ namespace Yahtzee_IIA.Models
                 get { return GetTable<Game>(); }
             }
 
+            public Table<Combination> Combination
+            {
+                get { return GetTable<Combination>(); }
+            }
+
+            public Table<Player> Player
+            {
+                get { return GetTable<Player>(); }
+            }
+
+            public Table<Dice> Dice
+            {
+                get { return GetTable<Dice>(); }
+            }
+
             /// <summary>
             ///      Obtient l'instance unique du contexte pour accéder à la base de données. (singleton)
             /// </summary>
