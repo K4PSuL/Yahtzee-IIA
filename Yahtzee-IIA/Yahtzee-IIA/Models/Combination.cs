@@ -10,7 +10,7 @@ using WP.Core;
 namespace Yahtzee_IIA.Models
 {
     [Table]
-    class Combination : ObservableObject
+    public class Combination : ObservableObject
     {
         #region Fields
 
