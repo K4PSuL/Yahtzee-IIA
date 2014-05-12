@@ -123,6 +123,22 @@ namespace Yahtzee_IIA.Models
                                  "lower", 
                              };
 
+            string[] methodes = { "calculateAs", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                                 "calculate", 
+                             };
+
             for (int i = 0; i < names.Length; i++)
             {
                 Combination combination = new Combination(names[i], descriptions[i], groups[i]);
@@ -133,6 +149,8 @@ namespace Yahtzee_IIA.Models
         #endregion
 
         #region Methods
+
+
 
         private void AttachCombination(Combination combination)
         {
