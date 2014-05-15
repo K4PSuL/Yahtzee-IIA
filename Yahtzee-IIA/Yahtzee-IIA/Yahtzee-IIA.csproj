@@ -164,7 +164,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="README_FIRST.txt" />
+    <Content Include="Resources\de1.png" />
+    <Content Include="Resources\de2.png" />
+    <Content Include="Resources\de3.png" />
+    <Content Include="Resources\de4.png" />
+    <Content Include="Resources\de5.png" />
+    <Content Include="Resources\de6.png" />
     <Content Include="Resources\logo.png" />
+    <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
