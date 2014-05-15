@@ -123,20 +123,20 @@ namespace Yahtzee_IIA.Models
                                  "lower", 
                              };
 
-            string[] methodes = { "calculateAs", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
-                                 "calculate", 
+            string[] methodes = {"calculateAces", 
+                                 "calculateTwos", 
+                                 "calculateThrees", 
+                                 "calculateFours", 
+                                 "calculateFives", 
+                                 "calculateSixes", 
+                                 "calculateBonus",
+                                 "calculateThreeOfAKind", 
+                                 "calculateFourOfAKind", 
+                                 "calculateFullHouse", 
+                                 "calculateSmallStraight", 
+                                 "calculateLargeStraight", 
+                                 "calculateYahtzee", 
+                                 "calculateChance"
                              };
 
             for (int i = 0; i < names.Length; i++)
@@ -149,8 +149,6 @@ namespace Yahtzee_IIA.Models
         #endregion
 
         #region Methods
-
-
 
         private void AttachCombination(Combination combination)
         {

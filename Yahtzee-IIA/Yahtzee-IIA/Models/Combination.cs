@@ -128,30 +128,34 @@ namespace Yahtzee_IIA.Models
 
         #region Methods
 
+        /// <summary>
+        ///     Compte le nombre de dés ayant comme valeur le nombre passé en paramètre
+        /// </summary>
+        /// <param name="number">Nombre à rechercher</param>
+        /// <param name="dices">Tableau des 5 dés</param>
+        /// <returns>Nombre de dés correspondants</returns>
         public int countNumberOf(int number, Dice[] dices)
         {
-            int cpt = 0;
+            int sum = 0;
 
             foreach (Dice dice in dices)
             {
                 if (dice.Number == number)
                 {
-                    cpt++;
+                    sum++;
                 }
             }
 
-            return cpt;
+            return sum;
         }
 
         /// <summary>
-        ///     Calcule la valeur possible d'après les 5 dés passés en paramètre
+        ///     Calcule la valeur possible de la combinaison d'après les 5 dés passés en paramètre
         /// </summary>
         /// <param name="dices">Tableau des 5 dés</param>
         /// <returns>Valeur possible de la combinaison</returns>
         public int calculateValue(Dice[] dices)
         {
-            //TODO: voir http://www.codeproject.com/Articles/8657/A-Simple-Yahtzee-Game
-
             int result = 0;
 
             switch (_id)
