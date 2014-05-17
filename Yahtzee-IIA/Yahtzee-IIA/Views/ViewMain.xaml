@@ -34,8 +34,8 @@
                 <Image Source="Resources/logo.png" Height="300" Visibility="Visible"/>
 
                 <Button  x:Name="ButtonJouer" Content="Jouer" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewCustomize.xaml"/>
-                <Button  x:Name="ButtonScore" Content="Scores" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewRank.xaml"/>
-                <Button  x:Name="ButtonParametre" Content="Paramètres" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewSetting.xaml"/>
+                <Button  x:Name="ButtonScore" Content="Scores" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewScores.xaml"/>
+                <Button  x:Name="ButtonParametre" Content="Paramètres" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewSettings.xaml"/>
 
             </StackPanel>
 
