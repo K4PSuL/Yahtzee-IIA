@@ -45,17 +45,17 @@ namespace Yahtzee_IIA.Views
 
             if (NavigationContext.QueryString.TryGetValue("pseudo2", out pseudo2Handle))
             {
-                pseudo2 = pseudo1Handle;
+                pseudo2 = pseudo2Handle;
             }
 
             if (NavigationContext.QueryString.TryGetValue("pseudo3", out pseudo3Handle))
             {
-                pseudo3 = pseudo1Handle;
+                pseudo3 = pseudo3Handle;
             }
 
             if (NavigationContext.QueryString.TryGetValue("pseudo4", out pseudo4Handle))
             {
-                pseudo4 = pseudo1Handle;
+                pseudo4 = pseudo4Handle;
             }  
 
             if (this.DataContext is ViewModels.ViewModelGame)
