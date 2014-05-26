@@ -21,7 +21,12 @@ namespace Yahtzee_IIA.Models
         /// <summary>
         ///     Nombre de lancers restants
         /// </summary>
-	    private int _nbRoll; 
+	    private int _nbRoll;
+
+        /// <summary>
+        ///     Booléen permettant de savoir si le joueur peut rejouer
+        /// </summary>
+        private bool _isPlayable;
 
         /// <summary>
         ///     Tableau des 5 dés
@@ -51,6 +56,13 @@ namespace Yahtzee_IIA.Models
         {
             get { return _nbRoll; }
             set { Assign(ref _nbRoll, value); }
+        }
+
+        [Column(DbType = "Boolean", CanBeNull = false)]
+        public bool IsPlayable
+        {
+            get { return _isPlayable; }
+            set { Assign(ref _isPlayable, value); }
         }
 
         public Dice[] Dices
