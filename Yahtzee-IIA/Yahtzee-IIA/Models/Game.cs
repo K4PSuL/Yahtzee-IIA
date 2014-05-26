@@ -105,7 +105,13 @@ namespace Yahtzee_IIA.Models
         /// </summary>
         public void roll() 
         {
-
+            foreach (Dice dice in _dices)
+            {
+                if (dice.Keep == false)
+                {
+                    this.random(dice);
+                }
+            }
         }
 
         /// <summary>
@@ -114,7 +120,13 @@ namespace Yahtzee_IIA.Models
         /// <param name="dice">Dé sur lequel effectuer le tirage</param>
 	    public void random (Dice dice) 
         {
-            //TODO: mettre à jour la propriété « number » du dé passé en paramètre avec le nombre aléatoire
+            //Tirage d'un nombre au hasard entre 1 et 6 et mise à jour de la propriété « number » du dé
+            Random random = new Random();
+            int randomNumber = random.Next(1, 6);
+            dice.Number = randomNumber;
+
+            //Mise à jour de la propriété « image » du dé
+            dice.Image = "de" + randomNumber + ".png";
         }
 
         /// <summary>

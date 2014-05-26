@@ -114,9 +114,9 @@
                         <TextBlock Text="F" TextWrapping="Wrap" Grid.Column="0" Grid.Row="5" />
                         <TextBlock Text="G" TextWrapping="Wrap" Grid.Column="0" Grid.Row="6" />
                         <TextBlock Text="H" TextWrapping="Wrap" Grid.Column="0" Grid.Row="7" />
-                                <TextBlock Text="I" TextWrapping="Wrap" Grid.Column="0" Grid.Row="8" />
+                        <TextBlock Text="I" TextWrapping="Wrap" Grid.Column="0" Grid.Row="8" />
 
-                                <Button Content="452" FontSize="17" Grid.Column="1" Grid.Row="0" />
+                        <Button Content="452" FontSize="17" Grid.Column="1" Grid.Row="0" />
                         <Button Content="45" FontSize="17" Grid.Column="1" Grid.Row="1" />
                         <Button Content="31" FontSize="17" Grid.Column="1" Grid.Row="2" />
                         <Button Content="123" FontSize="17" Grid.Column="1" Grid.Row="3" />
