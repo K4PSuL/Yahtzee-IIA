@@ -74,16 +74,11 @@ namespace Yahtzee_IIA.ViewModels
                         ListPlayers[3] = new Player(pseudo4);
                     }
                 }
-                
-                
 
                 this.Game = new Models.Game();
                 this.Game.Players.AddRange(_listPlayers.Where( p => p != null));
 
                 YahtzeeDataContext.Instance.Game.InsertOnSubmit(Game);
-
-                System.Diagnostics.Debug.WriteLine(Game.Players[0].Name);
-                System.Diagnostics.Debug.WriteLine(ListPlayers.Length);
             }
 
 

@@ -143,7 +143,10 @@ namespace Yahtzee_IIA.Models
             {
                 Combination combination = new Combination(names[i], descriptions[i], groups[i]);
                 YahtzeeDataContext.Instance.Combination.InsertOnSubmit(combination);
+
+                this._aCombinations.Add(combination);
             }
+
         }
 
         #endregion

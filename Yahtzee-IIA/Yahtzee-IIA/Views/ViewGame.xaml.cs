@@ -7,11 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Yahtzee_IIA.Models;
+using System.Windows.Media;
 
 namespace Yahtzee_IIA.Views
 {
     public partial class GamePage : PhoneApplicationPage
     {
+        
         public GamePage()
         {
             InitializeComponent();
@@ -19,6 +22,8 @@ namespace Yahtzee_IIA.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            #region Recuperer les pseudos
+
             string pseudo1Handle;
             string pseudo2Handle;
             string pseudo3Handle;
@@ -62,8 +67,59 @@ namespace Yahtzee_IIA.Views
             {
                 ((ViewModels.ViewModelGame)this.DataContext).LoadData(nbPlayer, pseudo1, pseudo2, pseudo3, pseudo4);
             }
+
+            #endregion
+
+            #region Creation des pivots
+
+            Player[] listPlayers = ((ViewModels.ViewModelGame)this.DataContext).ListPlayers;
+
+            #endregion
         }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(pivot.SelectedItem);
+        }
+
+        private void OnClickBtnRoll(object sender, RoutedEventArgs e)
+        {
+
+            Game game = ((ViewModels.ViewModelGame)this.DataContext).Game;
+
+            if (game.NbRoll > 0)
+            {
+                game.NbRoll--;
+
+                if (game.NbRoll == 0)
+                {
+                    game.IsPlayable = false;
+                }
+            }
+        
+
+            // TODO : 
+            //  Decrementer le nombre de coups restants
+            //  Si nbCoupsRestants = 0; Desactiver le bouton jouer
+            //
+            //  Game.roll();
+            //  Game.checkCombinaison(). Verifier toutes les combinaisons possible et afficher les valeurs (Combinaison.setValue())
+            //  
+            // 
+            // 
+        }
+
+        //private void OnClickDice(Button sender, RoutedEventArgs e)
+        //{
+
+
+        //    ImageBrush background = new ImageBrush();
+        //    background.ImageSource = new System.Windows.Media.Imaging.BitmapImage(new Uri(@"/Resources/de6.png", UriKind.Relative));
+        //    sender.Background = background;
+        //}
     }
+
+
 
 
 }

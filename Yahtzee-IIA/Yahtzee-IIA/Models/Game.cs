@@ -58,7 +58,7 @@ namespace Yahtzee_IIA.Models
             set { Assign(ref _nbRoll, value); }
         }
 
-        [Column(DbType = "Boolean", CanBeNull = false)]
+        [Column(DbType = "Bit", CanBeNull = false)]
         public bool IsPlayable
         {
             get { return _isPlayable; }
@@ -84,9 +84,8 @@ namespace Yahtzee_IIA.Models
         {
             //_aPlayers = new Player[nbPlayers];
             _aPlayers = new EntitySet<Player>(AttachPlayer, DetachPlayer);
-
- 
             _nbRoll = 3;
+            _isPlayable = true;
 
             //for (int i = 0; i < 5; i++)
             //{

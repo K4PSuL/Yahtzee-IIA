@@ -23,8 +23,8 @@
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
-        <controls:Pivot ItemsSource="{Binding Game.Players}" 
-                            SelectedItem="{Binding SelectedPlayers, Mode=TwoWay}" Margin="0">
+        <controls:Pivot Name="pivot"  ItemsSource="{Binding Game.Players}" 
+                            SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" Margin="0" SelectionChanged="Pivot_SelectionChanged">
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle1Style}"/>
@@ -50,47 +50,85 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0"
+                            <Button Name="BtnDe1"
+                                    Grid.Column="0"
+                                    Grid.Row="0" 
+                                    BorderThickness="0"
+                                    Padding="0"
+                                    >
+                                <Image Name="ImgDe1" Source="\Resources\de1.png" Width="50" Height="50"/>
+                            </Button>
+                            <Button Name="BtnDe2"
+                                    Grid.Column="1"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0">
-                                <Image Source="\Resources\de1.png" Width="50" Height="50"/>
+                                <Image Name="ImgDe2" Source="\Resources\de2.png" Width="50" Height="50"/>
                             </Button>
-                            <Button Grid.Column="1"
+                            <Button Name="BtnDe3"
+                                    Grid.Column="2"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0">
-                                <Image Source="\Resources\de2.png" Width="50" Height="50"/>
+                                <Image Name="ImgDe3" Source="\Resources\de3.png" Width="50" Height="50"/>
                             </Button>
-                            <Button Grid.Column="2"
+                            <Button Name="BtnDe4"
+                                    Grid.Column="3"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0">
-                                <Image Source="\Resources\de3.png" Width="50" Height="50"/>
+                                <Image Name="ImgDe4" Source="\Resources\de4.png" Width="50" Height="50"/>
                             </Button>
-                            <Button Grid.Column="3"
+                            <Button Name="BtnDe5"
+                                    Grid.Column="4"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0">
-                                <Image Source="\Resources\de4.png" Width="50" Height="50"/>
+                                <Image Name="ImgDe5" Source="\Resources\de5.png" Width="50" Height="50"/>
                             </Button>
-                            <Button Grid.Column="4"
-                                    Grid.Row="0" 
-                                    BorderThickness="0"
-                                    Padding="0">
-                                <Image Source="\Resources\de5.png" Width="50" Height="50"/>
-                            </Button>
-                            <Button Grid.ColumnSpan="2"
+
+                            <Button Name="BtnRoll"
+                                    Grid.ColumnSpan="2"
                                     Grid.Column="0"
                                     Grid.Row="1"
-                                    Content="Jouer" />
+                                    Content="Lancer" 
+                                    Click="OnClickBtnRoll"
+                                    IsEnabled="{Binding Game.IsPlayable, Mode=TwoWay}"/>
                             
-                            <TextBlock VerticalAlignment="Center" Text="Il vous reste 3 coups" TextWrapping="Wrap" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Game.NbRoll, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" />
                         </Grid>
 
                     <ScrollViewer>
-                        <Grid ShowGridLines="True" Margin="0,0,0,0">
-                        <Grid.RowDefinitions>
+
+                    <ListBox x:Name="ListBoxCombinaisons" ItemsSource="{Binding Combinations}">
+                        <ListBox.ItemTemplate>
+                            
+                            <DataTemplate>
+                                 <Grid  ShowGridLines="True" Margin="0,0,0,0">
+                                 <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock HorizontalAlignment="left" VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0"/>
+                                    <Button IsEnabled="{Binding Filled, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Value, Mode=TwoWay}" FontSize="17" Grid.Column="1"/>
+                                 </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+
+
+
+
+
+
+
+
+
+
+                            <!--<Grid ShowGridLines="True" Margin="0,0,0,0" x:Name="GridCombinaisons">
+                                
+                                <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -105,9 +143,9 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <!--<TextBox Text="{Binding Player.Combinations.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" /> -->
+                        --><!--<TextBox Text="{Binding Player.Combinations.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" /> --><!--
                         <TextBlock VerticalAlignment="Center" Text="A" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
-                        <TextBlock Text="B" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
+                        <TextBlock Name="test" Text="B" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
                         <TextBlock Text="C" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2" />
                         <TextBlock Text="D" TextWrapping="Wrap" Grid.Column="0" Grid.Row="3" />
                         <TextBlock Text="E" TextWrapping="Wrap" Grid.Column="0" Grid.Row="4" />
@@ -125,7 +163,7 @@
                         <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="6" />
                         <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="7" />
                         <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="8" />
-                        </Grid>
+                        </Grid>-->
 
                     </ScrollViewer>
                     </StackPanel>
