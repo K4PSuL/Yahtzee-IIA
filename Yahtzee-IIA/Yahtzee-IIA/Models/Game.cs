@@ -17,22 +17,10 @@ namespace Yahtzee_IIA.Models
 
         private long _id;
         private EntitySet<Player> _aPlayers;
-        //private Player[] _aPlayers;
 
-        /// <summary>
-        ///     Nombre de lancers restants
-        /// </summary>
-	    private int _nbRoll;
 
-        /// <summary>
-        ///     Booléen permettant de savoir si le joueur peut rejouer
-        /// </summary>
-        private bool _isPlayable;
 
-        /// <summary>
-        ///     Tableau des 5 dés
-        /// </summary>
-	    private Dice[] _dices;
+
 
         #endregion
 
@@ -52,25 +40,7 @@ namespace Yahtzee_IIA.Models
             set { _aPlayers.Assign(value); }
         }
 
-        [Column(DbType = "Int", CanBeNull = false)]
-        public int NbRoll
-        {
-            get { return _nbRoll; }
-            set { Assign(ref _nbRoll, value); }
-        }
 
-        [Column(DbType = "Bit", CanBeNull = false)]
-        public bool IsPlayable
-        {
-            get { return _isPlayable; }
-            set { Assign(ref _isPlayable, value); }
-        }
-
-        public Dice[] Dices
-        {
-            get { return _dices; }
-            set { Assign(ref _dices, value); }
-        }
 
         #endregion
 
@@ -85,18 +55,6 @@ namespace Yahtzee_IIA.Models
         {
             //_aPlayers = new Player[nbPlayers];
             _aPlayers = new EntitySet<Player>(AttachPlayer, DetachPlayer);
-            _nbRoll = 3;
-            _isPlayable = true;
-
-            Dices = new Dice[5];
-
-
-            for (int i = 0; i < 5; i++)
-            {
-               Dice dice = new Dice();
-
-               Dices[i] = dice;
-            }
         }
 
         #endregion
@@ -114,23 +72,6 @@ namespace Yahtzee_IIA.Models
             player.Game = null;
             OnPropertyChanged("Players");
         }
-
-        /// <summary>
-        ///     Appelle la fonction random pour les dés dont la propriété keep=false
-        /// </summary>
-        public void roll() 
-        {
-            foreach (Dice dice in _dices)
-            {
-                if (dice.Keep == false)
-                {
-                    dice.random();
-                    System.Diagnostics.Debug.WriteLine(dice.Image.ToString());
-                }
-            }
-        }
-
-
 
         /// <summary>
         ///     Contrôle s'il y a des combinaisons possibles en fonction des 5 dés

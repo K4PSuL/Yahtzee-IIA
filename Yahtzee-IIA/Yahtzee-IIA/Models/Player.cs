@@ -19,6 +19,22 @@ namespace Yahtzee_IIA.Models
         private EntityRef<Game> _gameRef;
         private String _name;
         private EntitySet<Combination> _aCombinations;
+        private bool _isStart;
+
+        /// <summary>
+        ///     Nombre de lancers restants
+        /// </summary>
+        private int _nbRoll;
+
+        /// <summary>
+        ///     Booléen permettant de savoir si le joueur peut rejouer
+        /// </summary>
+        private bool _isPlayable;
+
+        /// <summary>
+        ///     Tableau des 5 dés
+        /// </summary>
+        private Dice[] _dices;
 
         #endregion
 
@@ -42,7 +58,7 @@ namespace Yahtzee_IIA.Models
         public Game Game
         {
             get { return _gameRef.Entity; }
-            set { _gameRef.Entity = value; }
+            set { _gameRef.Entity = value; OnGameSetted(); }
         }
 
         [Column(DbType = "NVarChar(140)", CanBeNull = false)]
@@ -59,6 +75,32 @@ namespace Yahtzee_IIA.Models
             set { _aCombinations.Assign(value); }
         }
 
+        [Column(DbType = "Int", CanBeNull = false)]
+        public int NbRoll
+        {
+            get { return _nbRoll; }
+            set { Assign(ref _nbRoll, value); }
+        }
+
+        [Column(DbType = "Bit", CanBeNull = false)]
+        public bool IsPlayable
+        {
+            get { return _isPlayable; }
+            set { Assign(ref _isPlayable, value); }
+        }
+
+        public Dice[] Dices
+        {
+            get { return _dices; }
+            set { Assign(ref _dices, value); }
+        }
+
+        public bool IsStart
+        {
+            get { return _isStart; }
+            set { Assign(ref _isStart, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -73,80 +115,21 @@ namespace Yahtzee_IIA.Models
         {
             _gameRef = new EntityRef<Game>();
             _aCombinations = new EntitySet<Combination>(AttachCombination, DetachCombination);
-            _name = name;
 
-            string[] names = { "Total des As", 
-                                 "Total des Deux", 
-                                 "Total des Trois", 
-                                 "Total des Quatre", 
-                                 "Total des Cinq", 
-                                 "Total des Six", 
-                                 "Prime des 35 points", 
-                                 "Brelan", 
-                                 "Carré", 
-                                 "full", 
-                                 "Petite suite", 
-                                 "Grande suite", 
-                                 "Yahtzee",
-                                 "Chance", 
-                             };
+            Name = name;
 
-            string[] descriptions = { "ceci est un test", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                                 "", 
-                             };
+            NbRoll = 3;
+            IsPlayable = false;
+            IsStart = false;
 
-            string[] groups = { "upper", 
-                                 "upper", 
-                                 "upper", 
-                                 "upper", 
-                                 "upper", 
-                                 "upper", 
-                                 "bonus", 
-                                 "lower", 
-                                 "lower", 
-                                 "lower", 
-                                 "lower", 
-                                 "lower", 
-                                 "lower", 
-                                 "lower", 
-                             };
+            Dices = new Dice[5];
 
-            string[] methodes = {"calculateAces", 
-                                 "calculateTwos", 
-                                 "calculateThrees", 
-                                 "calculateFours", 
-                                 "calculateFives", 
-                                 "calculateSixes", 
-                                 "calculateBonus",
-                                 "calculateThreeOfAKind", 
-                                 "calculateFourOfAKind", 
-                                 "calculateFullHouse", 
-                                 "calculateSmallStraight", 
-                                 "calculateLargeStraight", 
-                                 "calculateYahtzee", 
-                                 "calculateChance"
-                             };
-
-            for (int i = 0; i < names.Length; i++)
+            for (int i = 0; i < 5; i++)
             {
-                Combination combination = new Combination(names[i], descriptions[i], groups[i]);
-                YahtzeeDataContext.Instance.Combination.InsertOnSubmit(combination);
+                Dice dice = new Dice();
 
-                this._aCombinations.Add(combination);
+                Dices[i] = dice;
             }
-
         }
 
         #endregion
@@ -163,6 +146,37 @@ namespace Yahtzee_IIA.Models
         {
             combination.Player = null;
             OnPropertyChanged("Combinations");
+        }
+
+        /// <summary>
+        ///     Appelle la fonction random pour les dés dont la propriété keep=false
+        /// </summary>
+        public void roll()
+        {
+            foreach (Dice dice in _dices)
+            {
+                if (dice.Keep == false)
+                {
+                    dice.random();
+                    System.Diagnostics.Debug.WriteLine(dice.Image.ToString());
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Contrôle s'il y a des combinaisons possibles en fonction des 5 dés
+        /// </summary>
+        /// <returns>True s'il y a des combinaisons possibles, false sinon</returns>
+        public bool checkCombinations()
+        {
+            //TODO: mettre à jour les propriétés « playable » de chaque combinaisons
+
+            foreach (Combination combination in Combinations)
+            {
+                combination.Calcul(Dices);
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -198,10 +212,10 @@ namespace Yahtzee_IIA.Models
 
             foreach (Combination item in _aCombinations)
             {
-                if (item.Group == "bonus")
-                {
-                    result += item.Value;
-                }
+                //if (item.Group == "bonus")
+                //{
+                //    result += item.Value;
+                //}
             }
 
             return result;
@@ -238,6 +252,94 @@ namespace Yahtzee_IIA.Models
             result += calculateTotalUpperSection() + calculateTotalLowerSection();
 
             return result;
+        }
+
+        private void OnGameSetted()
+        {
+            string[] names = { "Total des As", 
+                                 "Total des Deux", 
+                                 "Total des Trois", 
+                                 "Total des Quatre", 
+                                 "Total des Cinq", 
+                                 "Total des Six", 
+                                 "Brelan", 
+                                 "Carré", 
+                                 "Full", 
+                                 "Petite suite", 
+                                 "Grande suite", 
+                                 "Yahtzee",
+                                 "Chance", 
+                             };
+
+            string[] descriptions = { "Somme des dés 1", 
+                                 "Somme des dés 2", 
+                                 "Somme des dés 3", 
+                                 "Somme des dés 4", 
+                                 "Somme des dés 5", 
+                                 "Somme des dés 6", 
+                                 "3 dés identiques (somme des 5 dés)", 
+                                 "4 dés identiques (somme des 5 dés)", 
+                                 "Un brelan plus une paire (25 points)", 
+                                 "Suite de 4 dés (30 points)", 
+                                 "Suite de 5 dés (40 points)", 
+                                 "5 dés identiques (50 points)", 
+                                 "Somme des 5 dés", 
+                             };
+
+            string[] groups = { "upper", 
+                                 "upper", 
+                                 "upper", 
+                                 "upper", 
+                                 "upper", 
+                                 "upper", 
+                                 "lower", 
+                                 "lower", 
+                                 "lower", 
+                                 "lower", 
+                                 "lower", 
+                                 "lower", 
+                                 "lower", 
+                             };
+
+            string[] methodes = {"calculateAces", 
+                                 "calculateTwos", 
+                                 "calculateThrees", 
+                                 "calculateFours", 
+                                 "calculateFives", 
+                                 "calculateSixes", 
+                                 "calculateThreeOfAKind", 
+                                 "calculateFourOfAKind", 
+                                 "calculateFullHouse", 
+                                 "calculateSmallStraight", 
+                                 "calculateLargeStraight", 
+                                 "calculateYahtzee", 
+                                 "calculateChance"
+                             };
+
+
+            Func<Dice[], int>[] delegates = new Func<Dice[], int>[] { 
+                                 new Func<Dice[], int>(Game.calculateAces),
+                                 new Func<Dice[], int>(Game.calculateTwos),
+                                 new Func<Dice[], int>(Game.calculateThrees),
+                                 new Func<Dice[], int>(Game.calculateFours),
+                                 new Func<Dice[], int>(Game.calculateFives),
+                                 new Func<Dice[], int>(Game.calculateSixes),
+                                 new Func<Dice[], int>(Game.calculateThreeOfAKind),
+                                 new Func<Dice[], int>(Game.calculateFourOfAKind),
+                                 new Func<Dice[], int>(Game.calculateFullHouse),
+                                 new Func<Dice[], int>(Game.calculateLargeStraight),
+                                 new Func<Dice[], int>(Game.calculateSmallStraight),
+                                 new Func<Dice[], int>(Game.calculateYahtzee),
+                                 new Func<Dice[], int>(Game.calculateChance)
+                             };
+
+            for (int i = 0; i < names.Length; i++)
+            {
+                Combination combination = new Combination(names[i], descriptions[i], groups[i], delegates[i]);
+                YahtzeeDataContext.Instance.Combination.InsertOnSubmit(combination);
+
+                this._aCombinations.Add(combination);
+            }
         }
 
         #endregion

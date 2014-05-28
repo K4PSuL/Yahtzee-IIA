@@ -25,7 +25,7 @@
   <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
   <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
     <controls:Pivot Name="pivot"  ItemsSource="{Binding Game.Players}" 
-                            SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" Margin="0" SelectionChanged="Pivot_SelectionChanged">
+                            SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" Margin="0" >
       <controls:Pivot.HeaderTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle1Style}"/>
@@ -61,42 +61,55 @@
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0"
-                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="0"
-                                    IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
+                                    Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" 
+                                    CommandParameter="0"
+                                    IsEnabled="{Binding IsStart}">
                 
-                <Image Name="ImgDe1" Source="{Binding Game.Dices[0].Image}" Width="50" Height="50"/>
+                <Image Name="ImgDe1" Source="{Binding Dices[0].Image}" Width="50" Height="50"/>
               </Button>
+              
               <Button Name="BtnDe2" Grid.Column="1"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0"
-                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="1"
-                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
-                <Image Name="ImgDe2" Source="{Binding Game.Dices[1].Image}" Width="50" Height="50"/>
+                                    Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" 
+                                    CommandParameter="1"
+                                    IsEnabled="{Binding IsStart}">
+                
+                <Image Name="ImgDe2" Source="{Binding Dices[1].Image}" Width="50" Height="50"/>
               </Button>
+              
               <Button Name="BtnDe3" Grid.Column="2"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0"
-                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="2"
-                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
-                <Image Name="ImgDe3" Source="{Binding Game.Dices[2].Image}" Width="50" Height="50"/>
+                                    Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" 
+                                    CommandParameter="2"
+                                    IsEnabled="{Binding IsStart}">
+                
+                <Image Name="ImgDe3" Source="{Binding Dices[2].Image}" Width="50" Height="50"/>
               </Button>
+              
               <Button Name="BtnDe4" Grid.Column="3"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0"
-                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="3"
-                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
-                <Image Name="ImgDe4" Source="{Binding Game.Dices[3].Image}" Width="50" Height="50"/>
+                                    Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" 
+                                    CommandParameter="3"
+                                    IsEnabled="{Binding IsStart}">
+                
+                <Image Name="ImgDe4" Source="{Binding Dices[3].Image}" Width="50" Height="50"/>
               </Button>
+              
               <Button Name="BtnDe5" Grid.Column="4"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0"
-                                    Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="4"
-                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
-                <Image Name="ImgDe5" Source="{Binding Game.Dices[4].Image}" Width="50" Height="50"/>
+                                    Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" 
+                                    CommandParameter="4"
+                                    IsEnabled="{Binding IsStart}">
+                
+                <Image Name="ImgDe5" Source="{Binding Dices[4].Image}" Width="50" Height="50"/>
               </Button>
 
               <Button Name="BtnRoll" Grid.ColumnSpan="2"
@@ -104,9 +117,15 @@
                                     Grid.Row="1"
                                     Content="Lancer" 
                                     Command="{Binding ElementName=_this, Path=DataContext.ClickRollCommand}"
-                                    IsEnabled="{Binding Game.IsPlayable, Mode=TwoWay}"/>
+                                    IsEnabled="{Binding IsPlayable, Mode=TwoWay}"/>
 
-              <TextBlock VerticalAlignment="Center" Text="{Binding Game.NbRoll, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" />
+              <TextBlock VerticalAlignment="Center" 
+                         Text="{Binding NbRoll, Mode=TwoWay}" 
+                         TextWrapping="Wrap" 
+                         Grid.Column="2" 
+                         Grid.ColumnSpan="3" 
+                         Grid.Row="1" />
+            
             </Grid>
 
             <ListBox x:Name="ListBoxCombinaisons" ItemsSource="{Binding Combinations}" SelectedItem="{Binding ElementName=_this, Path=DataContext.SelectedCombination, Mode=TwoWay}" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -126,8 +145,18 @@
                       <RowDefinition Height="Auto"/>
                       <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="left" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0"/>
-                    <Button VerticalAlignment="Center" Command="{Binding Path=DataContext., ElementName=_this}" IsEnabled="{Binding Filled, Mode=TwoWay}" HorizontalAlignment="Center" Content="{Binding Value, Mode=TwoWay}" FontSize="17" Grid.Column="1"/>
+                    
+                    <Button VerticalAlignment="Center" 
+                            Command="{Binding Path=DataContext.ClickScoreCommand, ElementName=_this}" 
+                            CommandParameter="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem}"
+                            IsEnabled="{Binding IsNotFilled, Mode=TwoWay}" 
+                            HorizontalAlignment="Center" 
+                            Content="{Binding Value, Mode=TwoWay}" 
+                            FontSize="17" 
+                            Grid.Column="1"/>
+                  
                   </Grid>
                 </DataTemplate>
               </ListBox.ItemTemplate>

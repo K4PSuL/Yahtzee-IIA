@@ -21,10 +21,13 @@ namespace Yahtzee_IIA.Models
 	    private String _description; 
 	    private int _value;
 
+        private Func<Dice[], int> _calcul;
+
+
         /// <summary>
         ///     Permet de savoir si la combinaison est déjà remplie ou non
         /// </summary>
-	    private bool _filled; 
+	    private bool _isNotFilled; 
 
         /// <summary>
         ///     Permet de savoir si la combinaison est jouable (si sélection possible)
@@ -84,10 +87,10 @@ namespace Yahtzee_IIA.Models
         }
 
         [Column(DbType = "Bit NOT NULL", CanBeNull = false)]
-        public bool Filled
+        public bool IsNotFilled
         {
-            get { return _filled; }
-            set { Assign(ref _filled, value); }
+            get { return _isNotFilled; }
+            set { Assign(ref _isNotFilled, value); }
         }
 
         [Column(DbType = "Bit NOT NULL", CanBeNull = false)]
@@ -113,15 +116,17 @@ namespace Yahtzee_IIA.Models
         /// </summary>
         /// <param name="name">Nom de la combinaison</param>
         /// <param name="description">Description de la combinaison</param>
-        public Combination(String name, String description, String group)
+        public Combination(String name, String description, String group, Func<Dice[], int> calcul)
         {
             _playerRef = new EntityRef<Player>();
             _name = name;
             _description = description;
             _value = 0;
-            _filled = false;
+            _isNotFilled = true;
             _playable = false;
             _group = group;
+
+            _calcul = calcul;
         }
 
         #endregion
@@ -149,99 +154,108 @@ namespace Yahtzee_IIA.Models
             return sum;
         }
 
-        /// <summary>
-        ///     Calcule la valeur possible de la combinaison d'après les 5 dés passés en paramètre
-        /// </summary>
-        /// <param name="dices">Tableau des 5 dés</param>
-        /// <returns>Valeur possible de la combinaison</returns>
-        public int calculateValue(Dice[] dices)
+        public int Calcul(Dice[] dices)
         {
-            int result = 0;
-
-            switch (_id)
-            {
-                //Combination aces;
-                case 0:
-                    result = 1 * countNumberOf(1, dices);
-                    break;
-
-                //Combination twos ;
-                case 1:
-                    result = 2 * countNumberOf(2, dices);
-                    break;
-
-                //Combination threes;
-                case 2:
-                    result = 3 * countNumberOf(3, dices);
-                    break;
-
-                //Combination fours;
-                case 3:
-                    result = 4 * countNumberOf(4, dices);
-                    break;
-
-                //Combination fives;
-                case 4:
-                    result = 5 * countNumberOf(5, dices);
-                    break;
-
-                //Combination sixes;
-                case 5:
-                    result = 6 * countNumberOf(6, dices);
-                    break;
-
-                //Combination 3ofAKind; // Brelan -> Somme des  5 dés
-                case 6:
-                    foreach (Dice dice in dices)
-                    {
-                        result += dice.Number;
-                    }
-                    break;
-
-                //Combination 4ofAKind; // Carré -> Somme des  5 dés
-                case 7:
-                    foreach (Dice dice in dices)
-                    {
-                        result += dice.Number;
-                    }
-                    break;
-
-                //Combination fullHouse; // Full
-                case 8:
-                    result = 25;
-                    break;
-
-                //Combination smallStraight; // Petite suite
-                case 9:
-                    result = 30;
-                    break;
-
-                //Combination longStraight; // Grande suite
-                case 10:
-                    result = 40;
-                    break;
-
-                //Combination yahtzee;
-                case 11:
-                    result = 50;
-                    break;
-
-                //Combination chance; -> Somme des  5 dés
-                case 12:
-                    foreach (Dice dice in dices)
-                    {
-                        result += dice.Number;
-                    }
-                    break;
-
-                default:
-                    result = 0;
-                    break;
-            }
-
-            return result;
+            Value = this._calcul(dices);
+            return Value;
         }
+
+
 
         #endregion
     }
 }
+
+
+        ///// <summary>
+        /////     Calcule la valeur possible de la combinaison d'après les 5 dés passés en paramètre
+        ///// </summary>
+        ///// <param name="dices">Tableau des 5 dés</param>
+        ///// <returns>Valeur possible de la combinaison</returns>
+        //public int calculateValue(Dice[] dices)
+        //{
+        //    int result = 0;
+
+        //    switch (_id)
+        //    {
+        //        //Combination aces;
+        //        case 0:
+        //            result = 1 * countNumberOf(1, dices);
+        //            break;
+
+        //        //Combination twos ;
+        //        case 1:
+        //            result = 2 * countNumberOf(2, dices);
+        //            break;
+
+        //        //Combination threes;
+        //        case 2:
+        //            result = 3 * countNumberOf(3, dices);
+        //            break;
+
+        //        //Combination fours;
+        //        case 3:
+        //            result = 4 * countNumberOf(4, dices);
+        //            break;
+
+        //        //Combination fives;
+        //        case 4:
+        //            result = 5 * countNumberOf(5, dices);
+        //            break;
+
+        //        //Combination sixes;
+        //        case 5:
+        //            result = 6 * countNumberOf(6, dices);
+        //            break;
+
+        //        //Combination 3ofAKind; // Brelan -> Somme des  5 dés
+        //        case 6:
+        //            foreach (Dice dice in dices)
+        //            {
+        //                result += dice.Number;
+        //            }
+        //            break;
+
+        //        //Combination 4ofAKind; // Carré -> Somme des  5 dés
+        //        case 7:
+        //            foreach (Dice dice in dices)
+        //            {
+        //                result += dice.Number;
+        //            }
+        //            break;
+
+        //        //Combination fullHouse; // Full
+        //        case 8:
+        //            result = 25;
+        //            break;
+
+        //        //Combination smallStraight; // Petite suite
+        //        case 9:
+        //            result = 30;
+        //            break;
+
+        //        //Combination longStraight; // Grande suite
+        //        case 10:
+        //            result = 40;
+        //            break;
+
+        //        //Combination yahtzee;
+        //        case 11:
+        //            result = 50;
+        //            break;
+
+        //        //Combination chance; -> Somme des  5 dés
+        //        case 12:
+        //            foreach (Dice dice in dices)
+        //            {
+        //                result += dice.Number;
+        //            }
+        //            break;
+
+        //        default:
+        //            result = 0;
+        //            break;
+        //    }
+
+        //    return result;
+        //}

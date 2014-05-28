@@ -15,12 +15,12 @@ namespace Yahtzee_IIA.ViewModels
             private DelegateCommand _nextPlayerCommand;
             private DelegateCommand _clickRollCommand;
             private DelegateCommand _clickDiceCommand;
+            private DelegateCommand _clickScoreCommand;
 
             private Player _selectedPlayer;
             private Game _game;
             private Player[] _listPlayers;
             private Combination _selectedCombination;
-            private bool _isStart;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace Yahtzee_IIA.ViewModels
                     _nextPlayerCommand = new DelegateCommand(ExecuteNextPlayerCommand);
                     _clickRollCommand = new DelegateCommand(ExecuteClickRollCommand);
                     _clickDiceCommand = new DelegateCommand(ExecuteClickDiceCommand);
-                    _isStart = false;
+                    _clickScoreCommand = new DelegateCommand(ExecuteClickScoreCommand);
 
                     //_selectedPlayer = new Player();
                     ListPlayers = new Player[4];
@@ -48,12 +48,6 @@ namespace Yahtzee_IIA.ViewModels
             {
                 get { return _selectedPlayer; }
                 set { Assign(ref _selectedPlayer, value); }
-            }
-
-            public bool IsStart
-            {
-                get { return _isStart; }
-                set { Assign(ref _isStart, value); }
             }
 
             public DelegateCommand NextPlayerCommand
@@ -90,12 +84,26 @@ namespace Yahtzee_IIA.ViewModels
             {
             }
 
+            protected virtual void ExecuteClickScoreCommand(object parametre)
+            {
+                Combination combination = (Combination)parametre;
+
+                combination.IsNotFilled = false;
+
+                foreach (Combination c in _selectedPlayer.Combinations)
+	                {
+                        if (combination != c && c.IsNotFilled == true)
+                        {
+                            c.Value = 0;
+                        }
+	                }
+            }
+
             protected virtual void ExecuteClickDiceCommand(object parametre)
             {
-                //TODO : Garder le dès ou pas
                 int indexDice = Int32.Parse((string)parametre);
 
-                Dice dice = Game.Dices[indexDice];
+                Dice dice = _selectedPlayer.Dices[indexDice];
 
                 dice.Keep = !dice.Keep;
 
@@ -108,28 +116,24 @@ namespace Yahtzee_IIA.ViewModels
                     dice.Image = "/Resources/de" + dice.Number + ".png";
 
                 }
-
             }
         
             protected virtual void ExecuteClickRollCommand(object parametre)
             {
-                //TODO : Lancer les dés
+                SelectedPlayer.roll();
 
-                Game.roll();
-
-                if (Game.NbRoll > 0)
+                if (SelectedPlayer.NbRoll > 0)
                 {
-                    Game.NbRoll--;
+                    SelectedPlayer.NbRoll--;
 
-                    if (Game.NbRoll == 0)
+                    if (SelectedPlayer.NbRoll == 0)
                     {
-                        Game.IsPlayable = false;
+                        SelectedPlayer.IsPlayable = false;
                     }
                 }
 
-                IsStart = true;
-
-                //  Game.checkCombinaison(). Verifier toutes les combinaisons possible et afficher les valeurs (Combinaison.setValue())
+                SelectedPlayer.IsStart = true;
+                SelectedPlayer.checkCombinations();
             }
 
             public void LoadData(int nbPlayer, string pseudo1, string pseudo2, string pseudo3, string pseudo4)
@@ -148,18 +152,44 @@ namespace Yahtzee_IIA.ViewModels
                     }
                 }
 
+                _selectedPlayer = ListPlayers[0];
+
                 this.Game = new Models.Game();
                 this.Game.Players.AddRange(_listPlayers.Where( p => p != null));
 
-                foreach (Dice dice in Game.Dices)
-                {
-                    dice.Image = "/Resources/deInit.png";
-                    
-                }
+                this.initSelectedPlayer();
+          
 
                 YahtzeeDataContext.Instance.Game.InsertOnSubmit(Game);
             }
 
+        // TODO : COM
+            public void initSelectedPlayer()
+            {
+                foreach (Player player in this.Game.Players)
+                {
+                    foreach (Dice dice in player.Dices)
+                    {
+                        dice.Image = "/Resources/deInit.png";
+                        
+                    }
+
+                    if (SelectedPlayer != player)
+                    {
+                        player.IsPlayable = false;
+                    }
+                    else
+                    {
+                        player.IsPlayable = true;
+                    }
+
+                    player.IsStart = false;
+                    player.NbRoll = 3;
+                }
+
+
+
+            }
 
         #endregion
 

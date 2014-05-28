@@ -69,17 +69,6 @@ namespace Yahtzee_IIA.Views
             }
 
             #endregion
-
-            #region Creation des pivots
-
-            Player[] listPlayers = ((ViewModels.ViewModelGame)this.DataContext).ListPlayers;
-
-            #endregion
-        }
-
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine(pivot.SelectedItem);
         }
 
     }
