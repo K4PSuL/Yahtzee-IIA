@@ -27,6 +27,7 @@ namespace Yahtzee_IIA.ViewModels
         {
             get { return _goToNavigateCommand; }
         }
+
         #endregion
 
         #region Constructors

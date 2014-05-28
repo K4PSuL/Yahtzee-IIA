@@ -84,6 +84,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="EventToCommand.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

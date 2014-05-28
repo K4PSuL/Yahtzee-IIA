@@ -82,41 +82,6 @@ namespace Yahtzee_IIA.Views
             System.Diagnostics.Debug.WriteLine(pivot.SelectedItem);
         }
 
-        private void OnClickBtnRoll(object sender, RoutedEventArgs e)
-        {
-
-            Game game = ((ViewModels.ViewModelGame)this.DataContext).Game;
-
-            if (game.NbRoll > 0)
-            {
-                game.NbRoll--;
-
-                if (game.NbRoll == 0)
-                {
-                    game.IsPlayable = false;
-                }
-            }
-        
-
-            // TODO : 
-            //  Decrementer le nombre de coups restants
-            //  Si nbCoupsRestants = 0; Desactiver le bouton jouer
-            //
-            //  Game.roll();
-            //  Game.checkCombinaison(). Verifier toutes les combinaisons possible et afficher les valeurs (Combinaison.setValue())
-            //  
-            // 
-            // 
-        }
-
-        //private void OnClickDice(Button sender, RoutedEventArgs e)
-        //{
-
-
-        //    ImageBrush background = new ImageBrush();
-        //    background.ImageSource = new System.Windows.Media.Imaging.BitmapImage(new Uri(@"/Resources/de6.png", UriKind.Relative));
-        //    sender.Background = background;
-        //}
     }
 
 

@@ -91,7 +91,7 @@ namespace Yahtzee_IIA.Models
                                  "Chance", 
                              };
 
-            string[] descriptions = { "", 
+            string[] descriptions = { "ceci est un test", 
                                  "", 
                                  "", 
                                  "", 

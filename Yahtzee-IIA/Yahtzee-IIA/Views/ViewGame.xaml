@@ -15,118 +15,139 @@
     toolkit:TiltEffect.IsTiltEnabled="True"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    x:Name="_this">
 
-    <phone:PhoneApplicationPage.DataContext>
-        <vm:ViewModelGame/>
-    </phone:PhoneApplicationPage.DataContext>
+  <phone:PhoneApplicationPage.DataContext>
+    <vm:ViewModelGame/>
+  </phone:PhoneApplicationPage.DataContext>
 
-    <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
-        <controls:Pivot Name="pivot"  ItemsSource="{Binding Game.Players}" 
+  <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
+  <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
+    <controls:Pivot Name="pivot"  ItemsSource="{Binding Game.Players}" 
                             SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" Margin="0" SelectionChanged="Pivot_SelectionChanged">
-            <controls:Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle1Style}"/>
-                </DataTemplate>
-            </controls:Pivot.HeaderTemplate>
+      <controls:Pivot.HeaderTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </DataTemplate>
+      </controls:Pivot.HeaderTemplate>
 
-            <controls:Pivot.ItemTemplate>
-                <DataTemplate>
-                
-                        <!--  <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" /> 
+      <controls:Pivot.ItemTemplate>
+        <DataTemplate>
+
+          <!--  <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" /> 
                         <Button IsEnabled="{Binding CanPlay}"/> -->
-                    <StackPanel>
-                        <Grid Margin="0,0,5,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-                            <Button Name="BtnDe1"
-                                    Grid.Column="0"
+            <Grid Margin="0,0,5,0" Grid.Row="0">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Button Name="BtnDe1" Grid.Column="0"
                                     Grid.Row="0" 
                                     BorderThickness="0"
                                     Padding="0"
-                                    >
-                                <Image Name="ImgDe1" Source="\Resources\de1.png" Width="50" Height="50"/>
-                            </Button>
-                            <Button Name="BtnDe2"
-                                    Grid.Column="1"
+                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="0"
+                                    IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
+                
+                <Image Name="ImgDe1" Source="{Binding Game.Dices[0].Image}" Width="50" Height="50"/>
+              </Button>
+              <Button Name="BtnDe2" Grid.Column="1"
                                     Grid.Row="0" 
                                     BorderThickness="0"
-                                    Padding="0">
-                                <Image Name="ImgDe2" Source="\Resources\de2.png" Width="50" Height="50"/>
-                            </Button>
-                            <Button Name="BtnDe3"
-                                    Grid.Column="2"
+                                    Padding="0"
+                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="1"
+                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
+                <Image Name="ImgDe2" Source="{Binding Game.Dices[1].Image}" Width="50" Height="50"/>
+              </Button>
+              <Button Name="BtnDe3" Grid.Column="2"
                                     Grid.Row="0" 
                                     BorderThickness="0"
-                                    Padding="0">
-                                <Image Name="ImgDe3" Source="\Resources\de3.png" Width="50" Height="50"/>
-                            </Button>
-                            <Button Name="BtnDe4"
-                                    Grid.Column="3"
+                                    Padding="0"
+                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="2"
+                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
+                <Image Name="ImgDe3" Source="{Binding Game.Dices[2].Image}" Width="50" Height="50"/>
+              </Button>
+              <Button Name="BtnDe4" Grid.Column="3"
                                     Grid.Row="0" 
                                     BorderThickness="0"
-                                    Padding="0">
-                                <Image Name="ImgDe4" Source="\Resources\de4.png" Width="50" Height="50"/>
-                            </Button>
-                            <Button Name="BtnDe5"
-                                    Grid.Column="4"
+                                    Padding="0"
+                      Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="3"
+                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
+                <Image Name="ImgDe4" Source="{Binding Game.Dices[3].Image}" Width="50" Height="50"/>
+              </Button>
+              <Button Name="BtnDe5" Grid.Column="4"
                                     Grid.Row="0" 
                                     BorderThickness="0"
-                                    Padding="0">
-                                <Image Name="ImgDe5" Source="\Resources\de5.png" Width="50" Height="50"/>
-                            </Button>
+                                    Padding="0"
+                                    Command="{Binding ElementName=_this, Path=DataContext.ClickDiceCommand}" CommandParameter="4"
+                      IsEnabled="{Binding ElementName=_this, Path=DataContext.IsStart}">
+                <Image Name="ImgDe5" Source="{Binding Game.Dices[4].Image}" Width="50" Height="50"/>
+              </Button>
 
-                            <Button Name="BtnRoll"
-                                    Grid.ColumnSpan="2"
+              <Button Name="BtnRoll" Grid.ColumnSpan="2"
                                     Grid.Column="0"
                                     Grid.Row="1"
                                     Content="Lancer" 
-                                    Click="OnClickBtnRoll"
+                                    Command="{Binding ElementName=_this, Path=DataContext.ClickRollCommand}"
                                     IsEnabled="{Binding Game.IsPlayable, Mode=TwoWay}"/>
-                            
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Game.NbRoll, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" />
-                        </Grid>
 
-                    <ScrollViewer>
+              <TextBlock VerticalAlignment="Center" Text="{Binding Game.NbRoll, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" />
+            </Grid>
 
-                    <ListBox x:Name="ListBoxCombinaisons" ItemsSource="{Binding Combinations}">
-                        <ListBox.ItemTemplate>
-                            
-                            <DataTemplate>
-                                 <Grid  ShowGridLines="True" Margin="0,0,0,0">
-                                 <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock HorizontalAlignment="left" VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0"/>
-                                    <Button IsEnabled="{Binding Filled, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Value, Mode=TwoWay}" FontSize="17" Grid.Column="1"/>
-                                 </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+            <ListBox x:Name="ListBoxCombinaisons" ItemsSource="{Binding Combinations}" SelectedItem="{Binding ElementName=_this, Path=DataContext.SelectedCombination, Mode=TwoWay}" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible">
+              <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                  <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+              </ListBox.ItemContainerStyle>
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Grid  ShowGridLines="True" Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="left" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0"/>
+                    <Button VerticalAlignment="Center" Command="{Binding Path=DataContext., ElementName=_this}" IsEnabled="{Binding Filled, Mode=TwoWay}" HorizontalAlignment="Center" Content="{Binding Value, Mode=TwoWay}" FontSize="17" Grid.Column="1"/>
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock Grid.Row="2" Text="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem.Description}" TextWrapping="Wrap"/>
+            
+          </Grid>
+        </DataTemplate>
+      </controls:Pivot.ItemTemplate>
+    </controls:Pivot>
+  </Grid>
+
+</phone:PhoneApplicationPage>
 
 
 
 
 
-
-
-
-
-
-
-                            <!--<Grid ShowGridLines="True" Margin="0,0,0,0" x:Name="GridCombinaisons">
+<!--<Grid ShowGridLines="True" Margin="0,0,0,0" x:Name="GridCombinaisons">
                                 
                                 <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -143,7 +164,9 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        --><!--<TextBox Text="{Binding Player.Combinations.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" /> --><!--
+                        -->
+<!--<TextBox Text="{Binding Player.Combinations.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" /> -->
+<!--
                         <TextBlock VerticalAlignment="Center" Text="A" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
                         <TextBlock Name="test" Text="B" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
                         <TextBlock Text="C" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2" />
@@ -164,12 +187,3 @@
                         <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="7" />
                         <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="8" />
                         </Grid>-->
-
-                    </ScrollViewer>
-                    </StackPanel>
-                </DataTemplate>
-            </controls:Pivot.ItemTemplate>
-        </controls:Pivot>
-    </Grid>
-
-</phone:PhoneApplicationPage>

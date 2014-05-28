@@ -52,10 +52,29 @@ namespace Yahtzee_IIA.Models
         public Dice()
         {
             _number = 0;
-            _keep = true;
+            _keep = false;
             _image = null;
         }
 
         #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Génère un nombre aléatoire entre 1 et 5 pour le dé 
+        /// </summary>
+        public void random()
+        {
+            //Tirage d'un nombre au hasard entre 1 et 6 et mise à jour de la propriété « number » du dé
+            Random random = new Random();
+            int randomNumber = random.Next(1, 7);
+            this.Number = randomNumber;
+
+            //Mise à jour de la propriété « image » du dé
+            this.Image = "/Resources/de" + randomNumber + ".png";
+        }
+
+        #endregion
+
     }
 }
