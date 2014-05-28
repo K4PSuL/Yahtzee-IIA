@@ -128,7 +128,10 @@
             
             </Grid>
 
-            <ListBox x:Name="ListBoxCombinaisons" ItemsSource="{Binding Combinations}" SelectedItem="{Binding ElementName=_this, Path=DataContext.SelectedCombination, Mode=TwoWay}" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListBox x:Name="ListBoxCombinaisons" ItemsSource="{Binding Combinations}" 
+                     SelectedItem="{Binding ElementName=_this, Path=DataContext.SelectedCombination, Mode=TwoWay}" 
+                     Grid.Row="1" 
+                     ScrollViewer.VerticalScrollBarVisibility="Visible">
               <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                   <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -150,7 +153,7 @@
                     
                     <Button VerticalAlignment="Center" 
                             Command="{Binding Path=DataContext.ClickScoreCommand, ElementName=_this}" 
-                            CommandParameter="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem}"
+                            CommandParameter="{Binding }"
                             IsEnabled="{Binding IsNotFilled, Mode=TwoWay}" 
                             HorizontalAlignment="Center" 
                             Content="{Binding Value, Mode=TwoWay}" 

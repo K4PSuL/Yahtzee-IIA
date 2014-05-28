@@ -22,6 +22,9 @@ namespace Yahtzee_IIA.ViewModels
             private Player[] _listPlayers;
             private Combination _selectedCombination;
 
+            private int _iPlayer;
+            private int _nbPlayer;
+
         #endregion
 
         #region Constructors
@@ -31,6 +34,7 @@ namespace Yahtzee_IIA.ViewModels
                     _clickRollCommand = new DelegateCommand(ExecuteClickRollCommand);
                     _clickDiceCommand = new DelegateCommand(ExecuteClickDiceCommand);
                     _clickScoreCommand = new DelegateCommand(ExecuteClickScoreCommand);
+                    _iPlayer = 0;
 
                     //_selectedPlayer = new Player();
                     ListPlayers = new Player[4];
@@ -50,6 +54,18 @@ namespace Yahtzee_IIA.ViewModels
                 set { Assign(ref _selectedPlayer, value); }
             }
 
+            public int IPlayer
+            {
+                get { return _iPlayer; }
+                set { Assign(ref _iPlayer, value); }
+            }
+
+            public int NbPlayer
+            {
+                get { return _nbPlayer; }
+                set { Assign(ref _nbPlayer, value); }
+            }
+
             public DelegateCommand NextPlayerCommand
             {
                 get { return _nextPlayerCommand; }
@@ -58,6 +74,11 @@ namespace Yahtzee_IIA.ViewModels
             public DelegateCommand ClickRollCommand
             {
                 get { return _clickRollCommand; }
+            }
+
+            public DelegateCommand ClickScoreCommand
+            {
+                get { return _clickScoreCommand; }
             }
 
             public DelegateCommand ClickDiceCommand
@@ -86,17 +107,32 @@ namespace Yahtzee_IIA.ViewModels
 
             protected virtual void ExecuteClickScoreCommand(object parametre)
             {
-                Combination combination = (Combination)parametre;
+                SelectedCombination = parametre as Combination;
 
-                combination.IsNotFilled = false;
+                SelectedCombination.IsNotFilled = false;
 
                 foreach (Combination c in _selectedPlayer.Combinations)
 	                {
-                        if (combination != c && c.IsNotFilled == true)
+                        if (SelectedCombination != c && c.IsNotFilled == true)
                         {
                             c.Value = 0;
                         }
 	                }
+
+
+
+                if (IPlayer < NbPlayer - 1 )
+                {
+                    IPlayer++;
+                }
+                else
+                {
+                    IPlayer = 0;
+                }
+
+                SelectedPlayer = ListPlayers[IPlayer];
+
+                initSelectedPlayer();
             }
 
             protected virtual void ExecuteClickDiceCommand(object parametre)
@@ -138,7 +174,7 @@ namespace Yahtzee_IIA.ViewModels
 
             public void LoadData(int nbPlayer, string pseudo1, string pseudo2, string pseudo3, string pseudo4)
             {
-                
+                NbPlayer = nbPlayer;
                 ListPlayers[0] = new Player(pseudo1);
                 ListPlayers[1] = new Player(pseudo2);
 
