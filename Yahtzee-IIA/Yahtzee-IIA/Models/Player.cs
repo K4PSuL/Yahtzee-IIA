@@ -19,6 +19,10 @@ namespace Yahtzee_IIA.Models
         private EntityRef<Game> _gameRef;
         private String _name;
         private EntitySet<Combination> _aCombinations;
+
+        /// <summary>
+        ///     Booléen permettant de savoir si c'est un nouveau tour
+        /// </summary>
         private bool _isStart;
 
         /// <summary>
@@ -149,7 +153,7 @@ namespace Yahtzee_IIA.Models
         }
 
         /// <summary>
-        ///     Appelle la fonction random pour les dés dont la propriété keep=false
+        ///     Appelle la fonction random pour les dés qu'il faut rejouer (keep = false)
         /// </summary>
         public void roll()
         {
@@ -171,9 +175,14 @@ namespace Yahtzee_IIA.Models
         {
             //TODO: mettre à jour les propriétés « playable » de chaque combinaisons
 
+            // Parcours de chaque combinaison
             foreach (Combination combination in Combinations)
             {
-                combination.Calcul(Dices);
+                // Si la combinaison n'est pas encore remplie, on calcule le score possible
+                if (combination.IsNotFilled)
+                {
+                    combination.Calcul(Dices);
+                }
             }
 
             return true;

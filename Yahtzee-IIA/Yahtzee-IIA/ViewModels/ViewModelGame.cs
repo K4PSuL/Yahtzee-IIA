@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WP.Core;
 using Yahtzee_IIA.Models;
 
@@ -25,6 +26,11 @@ namespace Yahtzee_IIA.ViewModels
             private int _iPlayer;
             private int _nbPlayer;
 
+            /// <summary>
+            ///     Nombre de tours (13 pour chaque partie)
+            /// </summary>
+            private int _nbLaps;
+
         #endregion
 
         #region Constructors
@@ -35,7 +41,7 @@ namespace Yahtzee_IIA.ViewModels
                     _clickDiceCommand = new DelegateCommand(ExecuteClickDiceCommand);
                     _clickScoreCommand = new DelegateCommand(ExecuteClickScoreCommand);
                     _iPlayer = 0;
-
+                    _nbLaps = 0;
                     //_selectedPlayer = new Player();
                     ListPlayers = new Player[4];
                 }
@@ -64,6 +70,12 @@ namespace Yahtzee_IIA.ViewModels
             {
                 get { return _nbPlayer; }
                 set { Assign(ref _nbPlayer, value); }
+            }
+
+            public int NbLaps
+            {
+                get { return _nbLaps; }
+                set { Assign(ref _nbLaps, value); }
             }
 
             public DelegateCommand NextPlayerCommand
@@ -101,26 +113,35 @@ namespace Yahtzee_IIA.ViewModels
         #endregion
 
         #region Methods
+            /// <summary>
+            ///     Action lors du clic sur le bouton "Joueur suivant"
+            /// </summary>
+            /// <param name="parametre"></param>
             protected virtual void ExecuteNextPlayerCommand(object parametre)
             {
             }
 
+            /// <summary>
+            ///     Action lors de la sélection d'une combinaison
+            /// </summary>
+            /// <param name="parametre">La combinaison sélectionnée</param>
             protected virtual void ExecuteClickScoreCommand(object parametre)
             {
                 SelectedCombination = parametre as Combination;
 
+                // On bloque la combinaison sélectionnée pour qu'elle ne puisse plus être jouée
                 SelectedCombination.IsNotFilled = false;
 
+                // Remise à zéro des autres combinaisons
                 foreach (Combination c in _selectedPlayer.Combinations)
 	                {
-                        if (SelectedCombination != c && c.IsNotFilled == true)
+                        if (SelectedCombination.Name != c.Name && c.IsNotFilled == true)
                         {
                             c.Value = 0;
                         }
 	                }
 
-
-
+                // Passage au joueur suivant
                 if (IPlayer < NbPlayer - 1 )
                 {
                     IPlayer++;
@@ -128,21 +149,44 @@ namespace Yahtzee_IIA.ViewModels
                 else
                 {
                     IPlayer = 0;
+
+                    // Incrémentation du nombre de tour effectués
+                    NbLaps++;
                 }
 
-                SelectedPlayer = ListPlayers[IPlayer];
+                // Passage au joueur suivant tant que toutes les combinaisons ne sont pas jouées
+                if (NbLaps < 13)
+                {
+                    SelectedPlayer = ListPlayers[IPlayer];
 
-                initSelectedPlayer();
+                    // On initialise un nouveau tour pour le prochain joueur
+                    initSelectedPlayer();
+                }
+                else
+                {
+                    //TODO 1 : Affichage d'une nouvelle page avec le tableau des scores + les totaux
+                    //TODO 2 : Ajout d'un bouton "Rejouer"
+                    
+                    /*
+                    var result = MessageBox.Show("Le joueur ... a gagné ! Voulez-vous voir les scores ?", "Partie terminée", MessageBoxButton.OKCancel);
+
+                    // Si le bouton OK est sélectionné, on affiche la page des scores
+                    if (result == MessageBoxResult.OK)
+                    {
+                        //TODO : Arrêter la partie en cours, sauvegarder les scores
+                    }
+                    */
+                }
+
+                
             }
 
-            protected virtual void ExecuteClickDiceCommand(object parametre)
+            /// <summary>
+            ///     Mise à jour de l'image du dé en fonction de la propriété "keep"
+            /// </summary>
+            /// <param name="dice"></param>
+            protected virtual void UpdateDiceProperties(Dice dice)
             {
-                int indexDice = Int32.Parse((string)parametre);
-
-                Dice dice = _selectedPlayer.Dices[indexDice];
-
-                dice.Keep = !dice.Keep;
-
                 if (dice.Keep == true)
                 {
                     dice.Image = "/Resources/de" + dice.Number + "k.png";
@@ -150,28 +194,85 @@ namespace Yahtzee_IIA.ViewModels
                 else
                 {
                     dice.Image = "/Resources/de" + dice.Number + ".png";
-
                 }
             }
+
+            /// <summary>
+            ///     Action lors du clic sur un dé
+            /// </summary>
+            /// <param name="parametre">Id du dé cliqué</param>
+            protected virtual void ExecuteClickDiceCommand(object parametre)
+            {
+                // Récupération du dé cliqué
+                int indexDice = Int32.Parse((string)parametre);
+                Dice dice = _selectedPlayer.Dices[indexDice];
+
+                // Si le dé était gardé, on ne le garde plus, et inversement
+                dice.Keep = !dice.Keep;
+
+                // Mise à jour de l'image du dé
+                this.UpdateDiceProperties(dice);
+            }
         
+            /// <summary>
+            ///     Action lors du clic sur le bouton "Lancer"
+            /// </summary>
+            /// <param name="parametre"></param>
             protected virtual void ExecuteClickRollCommand(object parametre)
             {
+                // Lancement des dés
                 SelectedPlayer.roll();
 
+                // Activation des dés
+                SelectedPlayer.IsStart = true;
+
+                // Activation des combinaisons si elles ne sont pas encore remplies
+                foreach (Combination combination in SelectedPlayer.Combinations)
+                {
+                    if (combination.IsNotFilled)
+                    {
+                        combination.Playable = true;
+                    }
+                }
+
+                // Décrémentation du nombre de coups restants
                 if (SelectedPlayer.NbRoll > 0)
                 {
                     SelectedPlayer.NbRoll--;
 
+                    // S'il n'y a plus de lancers
                     if (SelectedPlayer.NbRoll == 0)
                     {
+                        // Le bouton "Lancer" est grisé
                         SelectedPlayer.IsPlayable = false;
+
+                        // Les dés deviennent inactifs
+                        SelectedPlayer.IsStart = false;
+
+                        // Les dés sont remis à leur l'état initial
+                        foreach (Dice dice in SelectedPlayer.Dices)
+                        {
+                            // On garde obligatoirement tous les dés
+                            dice.Keep = true;
+
+                            // Mise à jour de l'image du dé
+                            this.UpdateDiceProperties(dice);
+                        }
                     }
                 }
 
-                SelectedPlayer.IsStart = true;
+                // Calcule les scores des combinaisons d'après les 5 dés
                 SelectedPlayer.checkCombinations();
             }
 
+            /// <summary>
+            ///     Méthode de chargement des données au début du jeu
+            /// </summary>
+            /// <param name="nbPlayer">Nombre de joueurs</param>
+            /// <param name="pseudo1">Pseudo du joueur 1</param>
+            /// <param name="pseudo2">Pseudo du joueur 2</param>
+            /// <param name="pseudo3">Pseudo du joueur 3</param>
+            /// <param name="pseudo4">Pseudo du joueur 4</param>
             public void LoadData(int nbPlayer, string pseudo1, string pseudo2, string pseudo3, string pseudo4)
             {
                 NbPlayer = nbPlayer;
@@ -195,21 +296,25 @@ namespace Yahtzee_IIA.ViewModels
 
                 this.initSelectedPlayer();
           
-
                 YahtzeeDataContext.Instance.Game.InsertOnSubmit(Game);
             }
 
-        // TODO : COM
+            /// <summary>
+            ///     Méthode d'initialisation d'un joueur (appelée à chaque tour)
+            /// </summary>
             public void initSelectedPlayer()
             {
+                // Parcours de chaque joueur
                 foreach (Player player in this.Game.Players)
                 {
+                    // Les dés sont remis à leur l'état initial
                     foreach (Dice dice in player.Dices)
                     {
                         dice.Image = "/Resources/deInit.png";
-                        
+                        dice.Keep = false;
                     }
 
+                    // Si ce n'est pas à ce joueur de jouer, on bloque le bouton "Lancer"
                     if (SelectedPlayer != player)
                     {
                         player.IsPlayable = false;
@@ -219,11 +324,16 @@ namespace Yahtzee_IIA.ViewModels
                         player.IsPlayable = true;
                     }
 
+                    // On bloque les combinaisons pour qu'elles ne puissent pas être sélectionnées avant le prochain tour
+                    foreach (Combination combination in player.Combinations)
+                    {
+                        combination.Playable = false;
+                    }
+
+                    // Les propriétés sont remises à leur l'état initial
                     player.IsStart = false;
                     player.NbRoll = 3;
                 }
-
-
 
             }
 

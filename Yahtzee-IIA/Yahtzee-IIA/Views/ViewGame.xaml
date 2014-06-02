@@ -154,7 +154,7 @@
                     <Button VerticalAlignment="Center" 
                             Command="{Binding Path=DataContext.ClickScoreCommand, ElementName=_this}" 
                             CommandParameter="{Binding }"
-                            IsEnabled="{Binding IsNotFilled, Mode=TwoWay}" 
+                            IsEnabled="{Binding Playable, Mode=TwoWay}" 
                             HorizontalAlignment="Center" 
                             Content="{Binding Value, Mode=TwoWay}" 
                             FontSize="17" 
