@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -155,7 +156,7 @@ namespace Yahtzee_IIA.ViewModels
                 }
 
                 // Passage au joueur suivant tant que toutes les combinaisons ne sont pas jouées
-                if (NbLaps < 13)
+                if (NbLaps < 2)
                 {
                     SelectedPlayer = ListPlayers[IPlayer];
 
@@ -166,16 +167,61 @@ namespace Yahtzee_IIA.ViewModels
                 {
                     //TODO 1 : Affichage d'une nouvelle page avec le tableau des scores + les totaux
                     //TODO 2 : Ajout d'un bouton "Rejouer"
+
+                    List<Player> winners = new List<Player>();  // Liste des gagnants (plusieurs si égalité)
+                   
+                    foreach (Player player in Game.Players)
+                    {
+                        // Calcul des totaux
+                        player.TotalScore = player.calculateTotalScore();
+                        player.TotalUpperSection = player.calculateTotalUpperSection();
+                        player.TotalLowerSection = player.calculateTotalLowerSection();
+                        player.GrandTotal = player.calculateGrandTotal();
+
+                        // Sauvegarde du/des gagnant(s)
+                        if (winners.Count() == 0)
+                        {
+                            winners.Add(player);
+                        }
+                        else
+                        {
+                            if (winners[winners.Count() - 1].GrandTotal <= player.GrandTotal)
+                            {
+                                // On vide la liste si le nouveau total est supérieur à l'ancien
+                                if (winners[winners.Count() - 1].GrandTotal < player.GrandTotal)
+                                {
+                                    winners.Clear();
+                                }
+                                winners.Add(player);
+                            }
+                        }
+                    }
+
+                    // Affichage d'un message donnant le(s) nom(s) du/des gagnant(s) et son/leur score
+                    String message = "";
                     
-                    /*
-                    var result = MessageBox.Show("Le joueur ... a gagné ! Voulez-vous voir les scores ?", "Partie terminée", MessageBoxButton.OKCancel);
+                    if (winners.Count() == 1)
+                    {
+                        message = "\"" + winners[0].Name + "\" a gagné avec " + winners[0].GrandTotal + " points !";
+                    }
+                    else
+                    {
+                        message = "Egalité ! ";
+                        for (int i = 0; i < winners.Count(); i++)
+                        {
+                            message += "\"" + winners[i].Name + "\", ";
+                        }
+                        message += " ont gagné avec " + winners[0].GrandTotal + " points !";
+                    }
+
+                    var result = MessageBox.Show(message, "Partie terminée", MessageBoxButton.OKCancel);
 
                     // Si le bouton OK est sélectionné, on affiche la page des scores
                     if (result == MessageBoxResult.OK)
                     {
                         //TODO : Arrêter la partie en cours, sauvegarder les scores
                     }
-                    */
+                    
                 }
 
                 

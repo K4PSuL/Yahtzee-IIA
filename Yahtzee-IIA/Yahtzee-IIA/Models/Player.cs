@@ -40,6 +40,11 @@ namespace Yahtzee_IIA.Models
         /// </summary>
         private Dice[] _dices;
 
+        private int _totalScore;
+        private int _totalUpperSection;
+        private int _totalLowerSection;
+        private int _grandTotal;
+
         #endregion
 
         #region Properties
@@ -103,6 +108,34 @@ namespace Yahtzee_IIA.Models
         {
             get { return _isStart; }
             set { Assign(ref _isStart, value); }
+        }
+
+        [Column(DbType = "Int")]
+        public int TotalScore
+        {
+            get { return _totalScore; }
+            set { Assign(ref _totalScore, value); }
+        }
+
+        [Column(DbType = "Int")]
+        public int TotalUpperSection
+        {
+            get { return _totalUpperSection; }
+            set { Assign(ref _totalUpperSection, value); }
+        }
+
+        [Column(DbType = "Int")]
+        public int TotalLowerSection
+        {
+            get { return _totalLowerSection; }
+            set { Assign(ref _totalLowerSection, value); }
+        }
+
+        [Column(DbType = "Int")]
+        public int GrandTotal
+        {
+            get { return _grandTotal; }
+            set { Assign(ref _grandTotal, value); }
         }
 
         #endregion
@@ -214,17 +247,13 @@ namespace Yahtzee_IIA.Models
         /// <returns>Total de la section supérieure</returns>
         public int calculateTotalUpperSection()
         {
-
             int result = 0;
 
             result += calculateTotalScore();
 
-            foreach (Combination item in _aCombinations)
+            if (result >= 63)
             {
-                //if (item.Group == "bonus")
-                //{
-                //    result += item.Value;
-                //}
+                result += 35;
             }
 
             return result;
@@ -336,8 +365,8 @@ namespace Yahtzee_IIA.Models
                                  new Func<Dice[], int>(Game.calculateThreeOfAKind),
                                  new Func<Dice[], int>(Game.calculateFourOfAKind),
                                  new Func<Dice[], int>(Game.calculateFullHouse),
-                                 new Func<Dice[], int>(Game.calculateLargeStraight),
                                  new Func<Dice[], int>(Game.calculateSmallStraight),
+                                 new Func<Dice[], int>(Game.calculateLargeStraight),
                                  new Func<Dice[], int>(Game.calculateYahtzee),
                                  new Func<Dice[], int>(Game.calculateChance)
                              };
