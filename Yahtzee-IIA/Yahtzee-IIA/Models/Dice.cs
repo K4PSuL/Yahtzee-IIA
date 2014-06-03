@@ -66,7 +66,8 @@ namespace Yahtzee_IIA.Models
         public void random()
         {
             //Tirage d'un nombre au hasard entre 1 et 6 et mise à jour de la propriété « number » du dé
-            Random random = new Random();
+            //Random random = new Random();
+            Random random = new Random(unchecked((int)DateTime.Now.Ticks));
             int randomNumber = random.Next(1, 7);
             this.Number = randomNumber;
 

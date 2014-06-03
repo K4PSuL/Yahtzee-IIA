@@ -139,7 +139,7 @@
               </ListBox.ItemContainerStyle>
               <ListBox.ItemTemplate>
                 <DataTemplate>
-                  <Grid  ShowGridLines="True" Margin="0,0,0,0">
+                  <Grid ShowGridLines="True" Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="*" />
                       <ColumnDefinition Width="*" />
@@ -166,7 +166,7 @@
             </ListBox>
 
             <TextBlock Grid.Row="2" Text="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem.Description}" TextWrapping="Wrap"/>
-            
+
           </Grid>
         </DataTemplate>
       </controls:Pivot.ItemTemplate>

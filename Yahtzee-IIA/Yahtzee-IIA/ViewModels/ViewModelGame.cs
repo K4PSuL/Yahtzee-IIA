@@ -156,7 +156,7 @@ namespace Yahtzee_IIA.ViewModels
                 }
 
                 // Passage au joueur suivant tant que toutes les combinaisons ne sont pas jouées
-                if (NbLaps < 2)
+                if (NbLaps < 13)
                 {
                     SelectedPlayer = ListPlayers[IPlayer];
 
