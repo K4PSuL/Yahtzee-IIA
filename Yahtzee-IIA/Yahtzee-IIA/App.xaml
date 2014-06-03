@@ -6,11 +6,19 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
 
     <!--Ressources d'applications-->
-    <Application.Resources>
-        <local:LocalizedStrings xmlns:local="clr-namespace:Yahtzee_IIA" x:Key="LocalizedStrings"/>
-    </Application.Resources>
 
-    <Application.ApplicationLifetimeObjects>
+
+  <Application.Resources>
+    <local:LocalizedStrings xmlns:local="clr-namespace:Yahtzee_IIA" x:Key="LocalizedStrings"/>
+    
+
+    <Style x:Key="upper" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="Green"/>
+    </Style>
+
+  </Application.Resources>
+
+  <Application.ApplicationLifetimeObjects>
         <!--Objet requis qui gère les événements de durée de vie pour l'application-->
         <shell:PhoneApplicationService
             Launching="Application_Launching" Closing="Application_Closing"

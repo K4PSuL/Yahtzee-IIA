@@ -155,9 +155,12 @@ namespace Yahtzee_IIA.ViewModels
                     NbLaps++;
                 }
 
+
                 // Passage au joueur suivant tant que toutes les combinaisons ne sont pas jouées
                 if (NbLaps < 13)
                 {
+                    calculateScorePlayer(SelectedPlayer);
+
                     SelectedPlayer = ListPlayers[IPlayer];
 
                     // On initialise un nouveau tour pour le prochain joueur
@@ -172,11 +175,7 @@ namespace Yahtzee_IIA.ViewModels
                    
                     foreach (Player player in Game.Players)
                     {
-                        // Calcul des totaux
-                        player.TotalScore = player.calculateTotalScore();
-                        player.TotalUpperSection = player.calculateTotalUpperSection();
-                        player.TotalLowerSection = player.calculateTotalLowerSection();
-                        player.GrandTotal = player.calculateGrandTotal();
+                        calculateScorePlayer(player);
 
                         // Sauvegarde du/des gagnant(s)
                         if (winners.Count() == 0)
@@ -221,12 +220,20 @@ namespace Yahtzee_IIA.ViewModels
                     {
                         //TODO : Arrêter la partie en cours, sauvegarder les scores
                     }
-                    
-                }
 
+                }
                 
             }
 
+            private void calculateScorePlayer(Player player)
+            {
+                // Calcul des totaux
+                player.TotalScore = player.calculateTotalScore();
+                player.TotalUpperSection = player.calculateTotalUpperSection();
+                player.TotalLowerSection = player.calculateTotalLowerSection();
+                player.GrandTotal = player.calculateGrandTotal();
+
+            }
             /// <summary>
             ///     Mise à jour de l'image du dé en fonction de la propriété "keep"
             /// </summary>

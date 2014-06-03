@@ -158,6 +158,7 @@ namespace Yahtzee_IIA.Models
             NbRoll = 3;
             IsPlayable = false;
             IsStart = false;
+            TotalScore = 0;
 
             Dices = new Dice[5];
 

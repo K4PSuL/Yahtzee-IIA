@@ -67,10 +67,8 @@ namespace Yahtzee_IIA.Views
             {
                 ((ViewModels.ViewModelGame)this.DataContext).LoadData(nbPlayer, pseudo1, pseudo2, pseudo3, pseudo4);
             }
-
             #endregion
         }
-
     }
 
 

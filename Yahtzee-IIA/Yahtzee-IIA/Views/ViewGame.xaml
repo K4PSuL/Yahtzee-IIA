@@ -28,7 +28,7 @@
                             SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" Margin="0" >
       <controls:Pivot.HeaderTemplate>
         <DataTemplate>
-          <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle1Style}"/>
+          <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle2Style}"/>
         </DataTemplate>
       </controls:Pivot.HeaderTemplate>
 
@@ -46,8 +46,8 @@
 
             <Grid Margin="0,0,5,0" Grid.Row="0">
               <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -148,7 +148,7 @@
                       <RowDefinition Height="Auto"/>
                       <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="left" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0"/>
                     
                     <Button VerticalAlignment="Center" 
@@ -164,9 +164,38 @@
                 </DataTemplate>
               </ListBox.ItemTemplate>
             </ListBox>
-
+            <!--
+            
+            TODO : TOAST !!
             <TextBlock Grid.Row="2" Text="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem.Description}" TextWrapping="Wrap"/>
+-->
+            <Grid Margin="0,0,5,0" Grid.Row="2">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
 
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="Total Sup : " TextWrapping="Wrap"/>
+              <TextBlock Grid.Row="0" FontWeight="Bold" Grid.Column="1" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalScore, Mode=TwoWay}" TextWrapping="Wrap"/>
+              <TextBlock Grid.Row="1" Grid.Column="0" Text="Total Inf : " TextWrapping="Wrap"/>
+              <TextBlock Grid.Row="1" FontWeight="Bold" Grid.Column="1" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalLowerSection, Mode=TwoWay}" TextWrapping="Wrap"/>
+
+              <TextBlock Grid.Row="0" Grid.Column="3" Text="Total Sup (Prime) : " TextWrapping="Wrap"/>
+              <TextBlock Grid.Row="0" FontWeight="Bold" Grid.Column="4" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalUpperSection, Mode=TwoWay}" TextWrapping="Wrap"/>
+              <TextBlock Grid.Row="1" Grid.Column="3" Text="Total : " TextWrapping="Wrap"/>
+              <TextBlock Grid.Row="1" FontWeight="Bold" Grid.Column="4" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.GrandTotal, Mode=TwoWay}" TextWrapping="Wrap"/>
+            </Grid>
+            <!--
+            <TextBlock Grid.Row="2" Text="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem.Description}" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Text="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem.Description}" TextWrapping="Wrap"/>
+-->
           </Grid>
         </DataTemplate>
       </controls:Pivot.ItemTemplate>
@@ -174,48 +203,3 @@
   </Grid>
 
 </phone:PhoneApplicationPage>
-
-
-
-
-
-<!--<Grid ShowGridLines="True" Margin="0,0,0,0" x:Name="GridCombinaisons">
-                                
-                                <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        -->
-<!--<TextBox Text="{Binding Player.Combinations.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" /> -->
-<!--
-                        <TextBlock VerticalAlignment="Center" Text="A" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
-                        <TextBlock Name="test" Text="B" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
-                        <TextBlock Text="C" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2" />
-                        <TextBlock Text="D" TextWrapping="Wrap" Grid.Column="0" Grid.Row="3" />
-                        <TextBlock Text="E" TextWrapping="Wrap" Grid.Column="0" Grid.Row="4" />
-                        <TextBlock Text="F" TextWrapping="Wrap" Grid.Column="0" Grid.Row="5" />
-                        <TextBlock Text="G" TextWrapping="Wrap" Grid.Column="0" Grid.Row="6" />
-                        <TextBlock Text="H" TextWrapping="Wrap" Grid.Column="0" Grid.Row="7" />
-                        <TextBlock Text="I" TextWrapping="Wrap" Grid.Column="0" Grid.Row="8" />
-
-                        <Button Content="452" FontSize="17" Grid.Column="1" Grid.Row="0" />
-                        <Button Content="45" FontSize="17" Grid.Column="1" Grid.Row="1" />
-                        <Button Content="31" FontSize="17" Grid.Column="1" Grid.Row="2" />
-                        <Button Content="123" FontSize="17" Grid.Column="1" Grid.Row="3" />
-                        <Button Content="123" FontSize="17" Grid.Column="1" Grid.Row="4" />
-                        <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="5" />
-                        <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="6" />
-                        <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="7" />
-                        <Button Content="3rd row 2nd column" FontSize="17" Grid.Column="1" Grid.Row="8" />
-                        </Grid>-->
