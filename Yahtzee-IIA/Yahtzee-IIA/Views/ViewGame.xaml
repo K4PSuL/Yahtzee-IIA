@@ -149,9 +149,12 @@
                       <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="left" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0"/>
+                    <TextBlock Foreground="{Binding Color}" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="left" 
+                    Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="0"/>
                     
-                    <Button VerticalAlignment="Center" 
+                    <Button VerticalAlignment="Center"
                             Command="{Binding Path=DataContext.ClickScoreCommand, ElementName=_this}" 
                             CommandParameter="{Binding }"
                             IsEnabled="{Binding Playable, Mode=TwoWay}" 
@@ -182,15 +185,15 @@
                 <ColumnDefinition Width="Auto" />
               </Grid.ColumnDefinitions>
 
-              <TextBlock Grid.Row="0" Grid.Column="0" Text="Total Sup : " TextWrapping="Wrap"/>
-              <TextBlock Grid.Row="0" FontWeight="Bold" Grid.Column="1" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalScore, Mode=TwoWay}" TextWrapping="Wrap"/>
-              <TextBlock Grid.Row="1" Grid.Column="0" Text="Total Inf : " TextWrapping="Wrap"/>
-              <TextBlock Grid.Row="1" FontWeight="Bold" Grid.Column="1" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalLowerSection, Mode=TwoWay}" TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource upper}" Grid.Row="0" Grid.Column="0" Text="Total Sup : " TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource upper}" Grid.Row="0" FontWeight="Bold" Grid.Column="1" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalScore, Mode=TwoWay}" TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource lower}" Grid.Row="1" Grid.Column="0" Text="Total Inf : " TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource lower}" Grid.Row="1" FontWeight="Bold" Grid.Column="1" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalLowerSection, Mode=TwoWay}" TextWrapping="Wrap"/>
 
-              <TextBlock Grid.Row="0" Grid.Column="3" Text="Total Sup (Prime) : " TextWrapping="Wrap"/>
-              <TextBlock Grid.Row="0" FontWeight="Bold" Grid.Column="4" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalUpperSection, Mode=TwoWay}" TextWrapping="Wrap"/>
-              <TextBlock Grid.Row="1" Grid.Column="3" Text="Total : " TextWrapping="Wrap"/>
-              <TextBlock Grid.Row="1" FontWeight="Bold" Grid.Column="4" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.GrandTotal, Mode=TwoWay}" TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource upper}" Grid.Row="0" Grid.Column="3" Text="Total Sup + prime : " TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource upper}" Grid.Row="0" FontWeight="Bold" Grid.Column="4" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.TotalUpperSection, Mode=TwoWay}" TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource total}" Grid.Row="1" Grid.Column="3" Text="Total général : " TextWrapping="Wrap"/>
+              <TextBlock Style="{StaticResource total}" Grid.Row="1" FontWeight="Bold" Grid.Column="4" Text="{Binding ElementName=_this, Path=DataContext.SelectedPlayer.GrandTotal, Mode=TwoWay}" TextWrapping="Wrap"/>
             </Grid>
             <!--
             <TextBlock Grid.Row="2" Text="{Binding ElementName=ListBoxCombinaisons, Path=SelectedItem.Description}" TextWrapping="Wrap"/>

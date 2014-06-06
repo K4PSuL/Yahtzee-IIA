@@ -5,6 +5,7 @@ using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using WP.Core;
 
 namespace Yahtzee_IIA.Models
@@ -105,6 +106,34 @@ namespace Yahtzee_IIA.Models
         {
             get { return _group; }
             set { Assign(ref _group, value); }
+        }
+
+        public Brush Color
+        {
+            get
+            {
+                Brush brush = null;
+
+                switch (this.Group)
+                {
+                    case "upper" :
+                        brush = new SolidColorBrush(Colors.Yellow);
+                        break;
+
+                    case "lower":
+                        brush = new SolidColorBrush(Colors.Orange);
+                        break;
+
+                    case "total":
+                        brush = new SolidColorBrush(Colors.Red);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                return brush;
+            }
         }
 
         #endregion

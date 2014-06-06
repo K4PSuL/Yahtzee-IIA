@@ -11,12 +11,19 @@
   <Application.Resources>
     <local:LocalizedStrings xmlns:local="clr-namespace:Yahtzee_IIA" x:Key="LocalizedStrings"/>
     
-
     <Style x:Key="upper" TargetType="TextBlock">
-      <Setter Property="Foreground" Value="Green"/>
+      <Setter Property="Foreground" Value="Yellow"/>
     </Style>
 
-  </Application.Resources>
+    <Style x:Key="lower" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Orange"/>
+    </Style>
+
+    <Style x:Key="total" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Red"/>
+    </Style>
+
+    </Application.Resources>
 
   <Application.ApplicationLifetimeObjects>
         <!--Objet requis qui gère les événements de durée de vie pour l'application-->
