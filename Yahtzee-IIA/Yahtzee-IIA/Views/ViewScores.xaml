@@ -28,6 +28,37 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Foreground="Orange" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" 
+                       Text="Parties jouées le : 06/06/2014" TextAlignment="Center"/>
+
+            <TextBlock Foreground="Yellow" Grid.Row="1" Grid.Column="0" Text="Joueur 1" TextWrapping="Wrap"/>
+            <TextBlock Foreground="Yellow" Grid.Row="1" Grid.Column="1" Text="Joueur 2" TextWrapping="Wrap"/>
+            <TextBlock Foreground="Yellow" Grid.Row="1" Grid.Column="2" Text="Joueur 3" TextWrapping="Wrap"/>
+            <TextBlock Foreground="Yellow" Grid.Row="1" Grid.Column="3" Text="Joueur 4" TextWrapping="Wrap"/>
+
+
+            <!-- TODO : A répéter pour chaque partie -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Player 1" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Player 2" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Player 3" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="3" Text="Player 4" TextWrapping="Wrap"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="193" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="214" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="198" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="3" Text="256" TextWrapping="Wrap"/>
 
         </Grid>
     </Grid>
