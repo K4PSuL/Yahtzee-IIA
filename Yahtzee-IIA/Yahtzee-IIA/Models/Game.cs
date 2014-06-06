@@ -49,8 +49,6 @@ namespace Yahtzee_IIA.Models
         /// <summary>
         ///     Initialise une nouvelle instance de la classe Game
         /// </summary>
-        /// <param name="nbPlayers">Nombre de joueurs de la partie</param>
-        /// <param name="listPlayers">Liste des joueurs</param>
         public Game()
         {
             //_aPlayers = new Player[nbPlayers];

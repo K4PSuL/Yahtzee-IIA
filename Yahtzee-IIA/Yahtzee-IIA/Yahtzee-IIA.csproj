@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Models\YahtzeeDataContext.cs" />
     <Compile Include="ViewModels\ViewModelGame.cs" />
+    <Compile Include="ViewModels\ViewModelScore.cs" />
     <Compile Include="Views\ViewCustomize.xaml.cs">
       <DependentUpon>ViewCustomize.xaml</DependentUpon>
     </Compile>

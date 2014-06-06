@@ -20,9 +20,10 @@ namespace Yahtzee_IIA.ViewModels
             private DelegateCommand _clickScoreCommand;
 
             private Player _selectedPlayer;
+            private Combination _selectedCombination;
+
             private Game _game;
             private Player[] _listPlayers;
-            private Combination _selectedCombination;
 
             private int _iPlayer;
             private int _nbPlayer;
@@ -157,7 +158,7 @@ namespace Yahtzee_IIA.ViewModels
 
 
                 // Passage au joueur suivant tant que toutes les combinaisons ne sont pas jouées
-                if (NbLaps < 13)
+                if (NbLaps < 1)
                 {
                     calculateScorePlayer(SelectedPlayer);
 
@@ -215,10 +216,22 @@ namespace Yahtzee_IIA.ViewModels
 
                     var result = MessageBox.Show(message, "Partie terminée", MessageBoxButton.OKCancel);
 
+                    // Sauvergarde du Score en BDD
+                    YahtzeeDataContext.Instance.Game.InsertOnSubmit(Game);
+
                     // Si le bouton OK est sélectionné, on affiche la page des scores
                     if (result == MessageBoxResult.OK)
                     {
                         //TODO : Arrêter la partie en cours, sauvegarder les scores
+
+                        Game ReloadGame = new Game();
+
+                        ReloadGame = YahtzeeDataContext.Instance.Game.FirstOrDefault();
+                        if (ReloadGame == null)
+                        {
+                            throw new Exception("Aucun Score enregistré.");
+                        }
+
                     }
 
                 }
