@@ -18,29 +18,21 @@ namespace Yahtzee_IIA.Models
         private long _id;
         private EntitySet<Player> _aPlayers;
 
-
-
-
-
         #endregion
 
         #region Properties
 
-        [Column(IsPrimaryKey = true, DbType = "BigInt NOT NULL IDENTITY", CanBeNull = false, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
         public long Id
         {
             get { return _id; }
             set { Assign(ref _id, value); }
         }
 
-        [Association(Storage = "Players", OtherKey = "IdGame")]
         public EntitySet<Player> Players
         {
             get { return _aPlayers; }
             set { _aPlayers.Assign(value); }
         }
-
-
 
         #endregion
 
@@ -51,7 +43,6 @@ namespace Yahtzee_IIA.Models
         /// </summary>
         public Game()
         {
-            //_aPlayers = new Player[nbPlayers];
             _aPlayers = new EntitySet<Player>(AttachPlayer, DetachPlayer);
         }
 

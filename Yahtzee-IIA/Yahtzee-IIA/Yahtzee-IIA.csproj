@@ -36,6 +36,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -93,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Score.cs" />
     <Compile Include="Models\YahtzeeDataContext.cs" />
     <Compile Include="ViewModels\ViewModelGame.cs" />
     <Compile Include="ViewModels\ViewModelScore.cs" />
@@ -121,9 +123,6 @@
     <Compile Include="Views\ViewScores.xaml.cs">
       <DependentUpon>ViewScores.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewSettings.xaml.cs">
-      <DependentUpon>ViewSettings.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -143,10 +142,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ViewScores.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ViewSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +173,8 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="de1.png" />
+    <Content Include="logo.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Resources\de1.png" />
     <Content Include="Resources\de1k.png" />

@@ -7,111 +7,80 @@ using System.Threading.Tasks;
 
 namespace Yahtzee_IIA.Models
 {
-    class YahtzeeDataContext: DataContext
+    /// <summary>
+    /// Classe utilisée pour la base de données locale
+    /// </summary>
+    public class YahtzeeDataContext : DataContext
     {
-        #region Fields
-            private static string _Password;
-            private static YahtzeeDataContext _Instance;
-            private static object _InstanceLocker;
-        #endregion
+        public static string DBConnectionString = "Data source=isostore:/Yahtzee.sdf";
+        private static YahtzeeDataContext _Instance;
+        private static object _InstanceLocker;
 
-        #region Properties
-            /// <summary>
-            ///     Obtient ou définie le mot de passe utilisé pout chifrer la base de données
-            /// </summary>
-            public static string Password
+        /// <summary>
+        /// Obtient l'insance unique du contexte pour accéder à la base de données
+        /// </summary>
+        public static YahtzeeDataContext Instance
+        {
+            get
             {
-                get { return _Password; }
-                set { _Password = value; }
-            }
-
-            public Table<Game> Game
-            {
-                get { return GetTable<Game>(); }
-            }
-
-            public Table<Combination> Combination
-            {
-                get { return GetTable<Combination>(); }
-            }
-
-            public Table<Player> Player
-            {
-                get { return GetTable<Player>(); }
-            }
-
-            public Table<Dice> Dice
-            {
-                get { return GetTable<Dice>(); }
-            }
-
-            /// <summary>
-            ///      Obtient l'instance unique du contexte pour accéder à la base de données. (singleton)
-            /// </summary>
-            public static YahtzeeDataContext Instance
-            {
-                get
+                lock (_InstanceLocker)
                 {
-                    lock(_InstanceLocker)
+                    if (_Instance == null)
                     {
-                        if (_Instance == null)
-                        {
-                            Initialize();
-                        }
-                        return _Instance;
+                        //Initialiser l'instance unique
+                        Initialize();
                     }
+                    return _Instance;
                 }
-                set { _InstanceLocker = value; }
             }
-        #endregion
+        }
 
-        #region Constructors
+        /// <summary>
+        ///     Constructeur statique. Est appelé lors de l'initialisation de la première instance ou au premier accès
+        ///     à une propriété ou une méthode statique. Permet entre autre l'initialisation des champs statiques.
+        /// </summary>
+        static YahtzeeDataContext()
+        {
+            _InstanceLocker = new object();
+        }
 
-            /// <summary>
-            ///     Constructeur statique. Est appelé lors de l'initialisation de la premiere instance ou au premier 
-            ///     accès à une propriété ou une methode statique. Permet entre autre l'initialisation des champs statiques.
-            /// </summary>
-            static YahtzeeDataContext()
+        private YahtzeeDataContext(string connection, bool wipe = false)
+            : base(connection)
+        {
+            if (wipe && this.DatabaseExists())
             {
-                _InstanceLocker = new object();
+                //Vide les tables
+                /*this.Questions.DeleteAllOnSubmit(this.Questions);
+                this.Users.DeleteAllOnSubmit(this.Users);
+                this.SubmitChanges();*/
             }
-
-            /// <summary>
-            /// Initialise une nouvelle instance de la classe WP.PasswordBox.Models.PasswordBoxDataContext
-            /// </summary>
-            /// <param name="connection">Chaine de connexion à utiliser</param>
-            /// <param name="wipe">Détermine si la base de données existante doit être supprimée</param>
-            private YahtzeeDataContext(string connection, bool wipe = false) : base(connection) // Constructeur de la class parent ( : base())
+            if (!this.DatabaseExists())
             {
-                if (wipe && this.DatabaseExists())
-                {
-                    this.DeleteDatabase();
-                }
-
-                if (!this.DatabaseExists())
-                {
-                    this.CreateDatabase();
-                }
-
-                this.SubmitChanges(); // Permet de sauvegarder et / ou focer l'ouverture de la connexion.
+                this.CreateDatabase();
             }
-        #endregion
+            this.SubmitChanges(); // Permet de sauvegarder et / ou de forcer l'ouverture de la connexion
+        }
 
-        #region Methods
-
-            public static void Initialize(string connection = "", bool wipe = false)
+        /// <summary>
+        /// Initialise la base de données
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="wipe"></param>
+        public static void Initialize(string connection = "", bool wipe = false)
+        {
+            if (string.IsNullOrWhiteSpace(connection))
             {
-                if (_Instance != null)
-                {
-                    _Instance.Dispose(true); 
-                    _Instance = null;
-                }
-                if (string.IsNullOrWhiteSpace(connection)) {
-                    connection = "data Source='isostore:/YahtzeeDB.sdf';Password='" + Password + "'";
-                }
-
-                _Instance = new YahtzeeDataContext(connection, wipe);
+                connection = "Data source='isostore:/Yahtzee.sdf'";
             }
-         #endregion
+            _Instance = new YahtzeeDataContext(connection, wipe);
+        }
+
+        /// <summary>
+        /// Obtient la table des Scores
+        /// </summary>
+        public Table<Score> Score
+        {
+            get { return GetTable<Score>(); }
+        }
     }
 }

@@ -33,6 +33,8 @@ namespace Yahtzee_IIA.ViewModels
             /// </summary>
             private int _nbLaps;
 
+            
+
         #endregion
 
         #region Constructors
@@ -112,6 +114,8 @@ namespace Yahtzee_IIA.ViewModels
                 set { Assign(ref _selectedCombination, value); }
             }
 
+            
+
         #endregion
 
         #region Methods
@@ -158,7 +162,7 @@ namespace Yahtzee_IIA.ViewModels
 
 
                 // Passage au joueur suivant tant que toutes les combinaisons ne sont pas jouées
-                if (NbLaps < 1)
+                if (NbLaps < 13)
                 {
                     calculateScorePlayer(SelectedPlayer);
 
@@ -216,22 +220,28 @@ namespace Yahtzee_IIA.ViewModels
 
                     var result = MessageBox.Show(message, "Partie terminée", MessageBoxButton.OKCancel);
 
-                    // Sauvergarde du Score en BDD
-                    YahtzeeDataContext.Instance.Game.InsertOnSubmit(Game);
+                    // Sauvegarde du Score en BDD
+
+                    Score s = new Score(ListPlayers, _nbPlayer);
+
+                    YahtzeeDataContext.Instance.Score.InsertOnSubmit(s);
+
+                    try
+                    {
+                        YahtzeeDataContext.Instance.SubmitChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        
+                        throw;
+                    }
+
+                    int nb = YahtzeeDataContext.Instance.Score.Count();
 
                     // Si le bouton OK est sélectionné, on affiche la page des scores
                     if (result == MessageBoxResult.OK)
                     {
-                        //TODO : Arrêter la partie en cours, sauvegarder les scores
-
-                        Game ReloadGame = new Game();
-
-                        ReloadGame = YahtzeeDataContext.Instance.Game.FirstOrDefault();
-                        if (ReloadGame == null)
-                        {
-                            throw new Exception("Aucun Score enregistré.");
-                        }
-
+                        App.RootFrame.GoBack();
                     }
 
                 }
@@ -361,8 +371,6 @@ namespace Yahtzee_IIA.ViewModels
                 this.Game.Players.AddRange(_listPlayers.Where( p => p != null));
 
                 this.initSelectedPlayer();
-          
-                YahtzeeDataContext.Instance.Game.InsertOnSubmit(Game);
             }
 
             /// <summary>

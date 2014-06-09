@@ -2,7 +2,7 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="fr-FR" />
   <App xmlns="" ProductID="{dbf9fa0c-f6a9-454f-b81a-7931e88e451d}" Title="Yahtzee_IIA" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Yahtzee_IIA author" Description="Sample description" Publisher="Yahtzee_IIA" PublisherID="{c47bea5a-e31f-4658-9049-7ae0f5df13ac}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">logo.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />

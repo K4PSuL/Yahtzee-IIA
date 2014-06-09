@@ -13,29 +13,34 @@ namespace Yahtzee_IIA.Models
     {
         #region Fields
 
-        private int _number; 
-        private Boolean _keep; 
+        private long _id;
+        private int _number;
+        private Boolean _keep;
         private String _image;
 
         #endregion
 
         #region Properties
 
-        [Column(DbType = "Int")]
+        public long Id
+        {
+            get { return _id; }
+            set { Assign(ref _id, value); }
+
+        }
+
         public int Number
         {
             get { return _number; }
             set { Assign(ref _number, value); }
         }
 
-        [Column(DbType = "Bit", CanBeNull = false)]
         public Boolean Keep
         {
             get { return _keep; }
             set { Assign(ref _keep, value); }
         }
 
-        [Column(DbType = "NVarChar(1024)", CanBeNull = false)]
         public String Image
         {
             get { return _image; }

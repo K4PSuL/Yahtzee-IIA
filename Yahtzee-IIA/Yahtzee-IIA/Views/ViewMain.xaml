@@ -31,11 +31,10 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             
             <StackPanel x:Name="Corp" Grid.Row="0" Margin="12,17,0,28">
-                <Image Source="Resources/logo.png" Height="300" Visibility="Visible"/>
+                <Image Source="/Resources/logo.png" Height="300" Visibility="Visible" Margin="0,0,0,50"/>
 
                 <Button  x:Name="ButtonJouer" Content="Jouer" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewCustomize.xaml"/>
                 <Button  x:Name="ButtonScore" Content="Scores" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewScores.xaml"/>
-                <Button  x:Name="ButtonParametre" Content="Paramètres" Command="{Binding GoToNavigateCommand}" CommandParameter="/Views/ViewSettings.xaml"/>
 
             </StackPanel>
 

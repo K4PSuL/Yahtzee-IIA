@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Yahtzee_IIA.Models;
+using System.Collections.ObjectModel;
 
 namespace Yahtzee_IIA.Views
 {
@@ -15,6 +17,15 @@ namespace Yahtzee_IIA.Views
         public ViewScores()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+
+            if (this.DataContext is ViewModels.ViewModelScore)
+            {
+                ((ViewModels.ViewModelScore)this.DataContext).LoadData();
+            }
         }
     }
 }

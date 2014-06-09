@@ -19,8 +19,8 @@ namespace Yahtzee_IIA.Models
         private long _idPlayer;
         private EntityRef<Player> _playerRef;
         private String _name;
-	    private String _description; 
-	    private int _value;
+        private String _description;
+        private int _value;
 
         private Func<Dice[], int> _calcul;
 
@@ -28,12 +28,12 @@ namespace Yahtzee_IIA.Models
         /// <summary>
         ///     Permet de savoir si la combinaison est déjà remplie ou non
         /// </summary>
-	    private bool _isNotFilled; 
+        private bool _isNotFilled;
 
         /// <summary>
         ///     Permet de savoir si la combinaison est jouable (si sélection possible)
         /// </summary>
-	    private bool _playable;
+        private bool _playable;
 
         /// <summary>
         ///     Permet de savoir à quelle section la combinaison appartient (upper, prime, lower)
@@ -44,64 +44,55 @@ namespace Yahtzee_IIA.Models
 
         #region Properties
 
-        [Column(IsPrimaryKey = true, DbType = "BigInt NOT NULL IDENTITY", CanBeNull = false, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
         public long Id
         {
             get { return _id; }
             set { Assign(ref _id, value); }
-           
+
         }
 
-        [Column(DbType = "BigInt NOT NULL", CanBeNull = false)]
         public long IdPlayer
         {
             get { return _idPlayer; }
             set { Assign(ref _idPlayer, value); }
         }
 
-        [Association(Storage = "Player", ThisKey = "IdPlayer", IsForeignKey = true)]
         public Player Player
         {
             get { return _playerRef.Entity; }
             set { _playerRef.Entity = value; }
         }
 
-        [Column(DbType = "NVarChar(140) NOT NULL", CanBeNull = false)]
         public String Name
         {
             get { return _name; }
             set { Assign(ref _name, value); }
         }
 
-        [Column(DbType = "NVarChar(1024)", CanBeNull = false)]
         public String Description
         {
             get { return _description; }
             set { Assign(ref _description, value); }
         }
 
-        [Column(DbType = "Int", CanBeNull = false)]
         public int Value
         {
             get { return _value; }
             set { Assign(ref _value, value); }
         }
 
-        [Column(DbType = "Bit NOT NULL", CanBeNull = false)]
         public bool IsNotFilled
         {
             get { return _isNotFilled; }
             set { Assign(ref _isNotFilled, value); }
         }
 
-        [Column(DbType = "Bit NOT NULL", CanBeNull = false)]
         public bool Playable
         {
             get { return _playable; }
             set { Assign(ref _playable, value); }
         }
 
-        [Column(DbType = "NVarChar(10) NOT NULL", CanBeNull = false)]
         public String Group
         {
             get { return _group; }
@@ -116,7 +107,7 @@ namespace Yahtzee_IIA.Models
 
                 switch (this.Group)
                 {
-                    case "upper" :
+                    case "upper":
                         brush = new SolidColorBrush(Colors.Yellow);
                         break;
 

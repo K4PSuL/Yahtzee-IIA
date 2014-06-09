@@ -49,49 +49,42 @@ namespace Yahtzee_IIA.Models
 
         #region Properties
 
-        [Column(IsPrimaryKey = true, DbType = "BigInt NOT NULL IDENTITY", CanBeNull = false, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
         public long Id
         {
             get { return _id; }
             set { Assign(ref _id, value); }
         }
 
-        [Column(DbType = "BigInt NOT NULL", CanBeNull = false)]
         public long IdGame
         {
             get { return _idGame; }
             set { Assign(ref _idGame, value); }
         }
 
-        [Association(Storage = "Game", ThisKey = "IdGame", IsForeignKey = true)]
         public Game Game
         {
             get { return _gameRef.Entity; }
             set { _gameRef.Entity = value; OnGameSetted(); }
         }
 
-        [Column(DbType = "NVarChar(140)", CanBeNull = false)]
         public String Name
         {
             get { return _name; }
             set { Assign(ref _name, value); }
         }
 
-        [Association(Storage = "Combinations", OtherKey = "IdPlayer")]
         public EntitySet<Combination> Combinations
         {
             get { return _aCombinations; }
             set { _aCombinations.Assign(value); }
         }
 
-        [Column(DbType = "Int", CanBeNull = false)]
         public int NbRoll
         {
             get { return _nbRoll; }
             set { Assign(ref _nbRoll, value); }
         }
 
-        [Column(DbType = "Bit", CanBeNull = false)]
         public bool IsPlayable
         {
             get { return _isPlayable; }
@@ -110,28 +103,24 @@ namespace Yahtzee_IIA.Models
             set { Assign(ref _isStart, value); }
         }
 
-        [Column(DbType = "Int")]
         public int TotalScore
         {
             get { return _totalScore; }
             set { Assign(ref _totalScore, value); }
         }
 
-        [Column(DbType = "Int")]
         public int TotalUpperSection
         {
             get { return _totalUpperSection; }
             set { Assign(ref _totalUpperSection, value); }
         }
 
-        [Column(DbType = "Int")]
         public int TotalLowerSection
         {
             get { return _totalLowerSection; }
             set { Assign(ref _totalLowerSection, value); }
         }
 
-        [Column(DbType = "Int")]
         public int GrandTotal
         {
             get { return _grandTotal; }
@@ -207,8 +196,6 @@ namespace Yahtzee_IIA.Models
         /// <returns>True s'il y a des combinaisons possibles, false sinon</returns>
         public bool checkCombinations()
         {
-            //TODO: mettre à jour les propriétés « playable » de chaque combinaisons
-
             // Parcours de chaque combinaison
             foreach (Combination combination in Combinations)
             {
@@ -375,8 +362,6 @@ namespace Yahtzee_IIA.Models
             for (int i = 0; i < names.Length; i++)
             {
                 Combination combination = new Combination(names[i], descriptions[i], groups[i], delegates[i]);
-                YahtzeeDataContext.Instance.Combination.InsertOnSubmit(combination);
-
                 this._aCombinations.Add(combination);
             }
         }

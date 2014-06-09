@@ -6,12 +6,19 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Yahtzee_IIA.ViewModels"
+
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+    
+    <phone:PhoneApplicationPage.DataContext>
+        <vm:ViewModelScore/>
+    </phone:PhoneApplicationPage.DataContext>
+
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -28,10 +35,70 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Foreground="Yellow" Grid.Row="0" Grid.Column="0" Text="Joueur 1" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            <TextBlock Foreground="Yellow" Grid.Row="0" Grid.Column="1" Text="Joueur 2" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            <TextBlock Foreground="Yellow" Grid.Row="0" Grid.Column="2" Text="Joueur 3" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            <TextBlock Foreground="Yellow" Grid.Row="0" Grid.Column="3" Text="Joueur 4" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            
+            <ListBox x:Name="ListBoxScores" ItemsSource="{Binding Scores}"
+                     Grid.Row="1" 
+                     Grid.Column="0"
+                     Grid.ColumnSpan="4"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ShowGridLines="True" Margin="0,25,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Player1}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Player2}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Player3}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Player4}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Score1}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Score2}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Score3}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Score4}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+<!--
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -49,17 +116,16 @@
             <TextBlock Foreground="Yellow" Grid.Row="1" Grid.Column="3" Text="Joueur 4" TextWrapping="Wrap"/>
 
 
-            <!-- TODO : A répéter pour chaque partie -->
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Player 1" TextWrapping="Wrap"/>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="Player 2" TextWrapping="Wrap"/>
             <TextBlock Grid.Row="2" Grid.Column="2" Text="Player 3" TextWrapping="Wrap"/>
             <TextBlock Grid.Row="2" Grid.Column="3" Text="Player 4" TextWrapping="Wrap"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="193" TextWrapping="Wrap"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="214" TextWrapping="Wrap"/>
-            <TextBlock Grid.Row="2" Grid.Column="2" Text="198" TextWrapping="Wrap"/>
-            <TextBlock Grid.Row="2" Grid.Column="3" Text="256" TextWrapping="Wrap"/>
-
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="193" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="214" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="198" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="3" Grid.Column="3" Text="256" TextWrapping="Wrap"/>
+ -->
         </Grid>
     </Grid>
 
